@@ -82,7 +82,7 @@
  * connection that may help in the event of connection issues. If defined, some boards may not begin
  * executing this sketch until the Serial console is opened.
  */
-//#define SERIAL_DEBUG
+#define SERIAL_DEBUG
 #include "utility/firmataDebug.h"
 
 /*

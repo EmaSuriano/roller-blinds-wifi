@@ -111,12 +111,11 @@
 // STEP 2 [OPTIONAL for all boards and shields]
 // If you want to setup you board as a TCP client, uncomment the following define and replace
 // the IP address with the IP address of your server.
-#define SERVER_IP 192, 168, 1, 100
-
+#define SERVER_IP  172, 16, 0, 138
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "chimichurri";
+char ssid[] = "FDV2";
 
 
 // STEP 4 [OPTIONAL for all boards and shields]
@@ -148,7 +147,7 @@ char ssid[] = "chimichurri";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "asdasd123";
+char wpa_passphrase[] = "Kornett3011";
 #endif  //WIFI_WPA_SECURITY
 
 
