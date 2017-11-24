@@ -1,7 +1,8 @@
 {
-  "name": "jhonny-five-roller-blinds",
+  "name": "roller-blinds-wifi",
   "version": "1.0.0",
-  "description": "",
+  "description":
+    "This a project made with nodemcu and jhony five to control any roller blinds via Wi-fi",
   "main": "test.js",
   "dependencies": {
     "etherport": "^0.2.0",
@@ -10,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node ./test.js"
+    "test": "node ./src/test.js"
   },
   "author": "",
   "license": "ISC"
