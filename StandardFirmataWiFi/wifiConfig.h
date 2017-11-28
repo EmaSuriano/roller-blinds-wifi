@@ -39,7 +39,7 @@
 #include <WiFi101.h>
 #include "utility/WiFiClientStream.h"
 #include "utility/WiFiServerStream.h"
-  #define WIFI_LIB_INCLUDED
+#define WIFI_LIB_INCLUDED
 #endif
 
 /*
@@ -59,11 +59,11 @@
 #include <WiFi.h>
 #include "utility/WiFiClientStream.h"
 #include "utility/WiFiServerStream.h"
-  #ifdef WIFI_LIB_INCLUDED
-  #define MULTIPLE_WIFI_LIB_INCLUDES
-  #else
-  #define WIFI_LIB_INCLUDED
-  #endif
+#ifdef WIFI_LIB_INCLUDED
+#define MULTIPLE_WIFI_LIB_INCLUDES
+#else
+#define WIFI_LIB_INCLUDED
+#endif
 #endif
 
 /*
@@ -87,11 +87,11 @@
 #include <ESP8266WiFi.h>
 #include "utility/WiFiClientStream.h"
 #include "utility/WiFiServerStream.h"
-  #ifdef WIFI_LIB_INCLUDED
-  #define MULTIPLE_WIFI_LIB_INCLUDES
-  #else
-  #define WIFI_LIB_INCLUDED
-  #endif
+#ifdef WIFI_LIB_INCLUDED
+#define MULTIPLE_WIFI_LIB_INCLUDES
+#else
+#define WIFI_LIB_INCLUDED
+#endif
 #endif
 
 /*
@@ -107,30 +107,26 @@
 //------------------------------
 //#define HUZZAH_WIFI
 
-
 // STEP 2 [OPTIONAL for all boards and shields]
 // If you want to setup you board as a TCP client, uncomment the following define and replace
 // the IP address with the IP address of your server.
-#define SERVER_IP  172, 16, 0, 138
+#define SERVER_IP 192, 168, 1, 100
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "FDV2";
-
+char ssid[] = "chimichurri";
 
 // STEP 4 [OPTIONAL for all boards and shields]
 // If you want to use a static IP (v4) address, uncomment the line below. You can also change the IP.
 // If the first line is commented out, the WiFi shield will attempt to get an IP from the DHCP server.
 // If you are using a static IP with the ESP8266 then you must also uncomment the SUBNET and GATEWAY.
 //#define STATIC_IP_ADDRESS  192,168,1,113
-//#define SUBNET_MASK        255,255,255,0 // REQUIRED for ESP8266_WIFI, optional for others
-//#define GATEWAY_IP_ADDRESS 192,168,1,1       // REQUIRED for ESP8266_WIFI, optional for others
-
+//#define SUBNET_MASK        255,255,255,0
+//#define GATEWAY_IP_ADDRESS 192,168,1,1
 
 // STEP 5 [REQUIRED for all boards and shields]
 // define your port number here, you will need this to open a TCP connection to your Arduino
 #define SERVER_PORT 3030
-
 
 // STEP 6 [REQUIRED for all boards and shields]
 // determine your network security type (OPTION A, B, or C). Option A is the most common, and the
@@ -147,9 +143,8 @@ char ssid[] = "FDV2";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "Kornett3011";
-#endif  //WIFI_WPA_SECURITY
-
+char wpa_passphrase[] = "asdasd123";
+#endif //WIFI_WPA_SECURITY
 
 /*
  * OPTION B: WEP
@@ -167,8 +162,7 @@ char wpa_passphrase[] = "Kornett3011";
 //Valid indices are [0-3], even if your router/gateway numbers your keys [1-4].
 byte wep_index = 0;
 char wep_key[] = "asdasd123";
-#endif  //WIFI_WEP_SECURITY
-
+#endif //WIFI_WEP_SECURITY
 
 /*
  * OPTION C: Open network (no security)
@@ -195,11 +189,11 @@ char wep_key[] = "asdasd123";
 
 #if ((defined(WIFI_NO_SECURITY) && (defined(WIFI_WEP_SECURITY) || defined(WIFI_WPA_SECURITY))) || (defined(WIFI_WEP_SECURITY) && defined(WIFI_WPA_SECURITY)))
 #error "you may not define more than one security type at the same time in wifiConfig.h."
-#endif  //WIFI_* security define check
+#endif //WIFI_* security define check
 
 #if !(defined(WIFI_NO_SECURITY) || defined(WIFI_WEP_SECURITY) || defined(WIFI_WPA_SECURITY))
 #error "you must define a wifi security type in wifiConfig.h."
-#endif  //WIFI_* security define check
+#endif //WIFI_* security define check
 
 #if (defined(ESP8266_WIFI) && !(defined(WIFI_NO_SECURITY) || (defined(WIFI_WPA_SECURITY))))
 #error "you must choose between WIFI_NO_SECURITY and WIFI_WPA_SECURITY"
@@ -210,9 +204,9 @@ char wep_key[] = "asdasd123";
  *============================================================================*/
 
 #ifdef SERVER_IP
-  WiFiClientStream stream(IPAddress(SERVER_IP), SERVER_PORT);
+WiFiClientStream stream(IPAddress(SERVER_IP), SERVER_PORT);
 #else
-  WiFiServerStream stream(SERVER_PORT);
+WiFiServerStream stream(SERVER_PORT);
 #endif
 
 /*==============================================================================
@@ -222,18 +216,18 @@ char wep_key[] = "asdasd123";
 #if defined(WIFI_101) && !defined(ARDUINO_SAMD_MKR1000)
 // ignore SPI pins, pin 5 (reset WiFi101 shield), pin 7 (WiFi handshake) and pin 10 (WiFi SS)
 // also don't ignore SS pin if it's not pin 10. Not needed for Arduino MKR1000.
-#define IS_IGNORE_PIN(p)  ((p) == 10 || (IS_PIN_SPI(p) && (p) != SS) || (p) == 5 || (p) == 7)
+#define IS_IGNORE_PIN(p) ((p) == 10 || (IS_PIN_SPI(p) && (p) != SS) || (p) == 5 || (p) == 7)
 
 #elif defined(ARDUINO_WIFI_SHIELD) && defined(__AVR_ATmega32U4__)
 // ignore SPI pins, pin 4 (SS for SD-Card on WiFi-shield), pin 7 (WiFi handshake) and pin 10 (WiFi SS)
 // On Leonardo, pin 24 maps to D4 and pin 28 maps to D10
-#define IS_IGNORE_PIN(p)  ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10 || (p) == 24 || (p) == 28)
+#define IS_IGNORE_PIN(p) ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10 || (p) == 24 || (p) == 28)
 
 #elif defined(ARDUINO_WIFI_SHIELD)
 // ignore SPI pins, pin 4 (SS for SD-Card on WiFi-shield), pin 7 (WiFi handshake) and pin 10 (WiFi SS)
-#define IS_IGNORE_PIN(p)  ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10)
+#define IS_IGNORE_PIN(p) ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10)
 
 #elif defined(ESP8266_WIFI) && defined(SERIAL_DEBUG)
-#define IS_IGNORE_PIN(p)  ((p) == 1)
+#define IS_IGNORE_PIN(p) ((p) == 1)
 
 #endif
