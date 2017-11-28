@@ -114,7 +114,7 @@
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "chimichurri";
+char ssid[] = "NETWORK_NAME";
 
 // STEP 4 [OPTIONAL for all boards and shields]
 // If you want to use a static IP (v4) address, uncomment the line below. You can also change the IP.
@@ -143,7 +143,7 @@ char ssid[] = "chimichurri";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "asdasd123";
+char wpa_passphrase[] = "NETWORK_PASSWORD";
 #endif //WIFI_WPA_SECURITY
 
 /*
