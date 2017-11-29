@@ -20,5 +20,5 @@ const board = new five.Board({
 // });
 
 board.on('ready', function() {
-  console.log('CONNECTION HAS BEEN SUCCESSFULLY ESTABLISHED');
+              console.log('CONNECTION HAS BEEN SUCCESSFULLY ESTABLISHED');
 });
