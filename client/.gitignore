@@ -58,3 +58,4 @@ project.xcworkspace
 
 # Intellij
 .idea
+.vscode
