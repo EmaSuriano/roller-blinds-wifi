@@ -1,13 +1,14 @@
 import React from 'react';
 
 import Title from '../Title';
-import AboutButton from '../AboutButton';
-import HelpButton from '../HelpButton';
+import Arrow from '../Arrow';
+import RollerBlind from '../RollerBlind';
 
 export default () => (
   <div className="container">
     <Title />
-    <AboutButton />
-    <HelpButton />
+    <Arrow />
+    <RollerBlind />
+    <Arrow isGoingUp />
   </div>
 );
