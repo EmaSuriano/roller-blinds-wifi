@@ -1,7 +1,7 @@
 import { MOVE_ROLLER_BLIND } from '../actions/types';
 
 const initialState = {
-  rollerBlindHeight: 0,
+  rollerBlindHeight: 0
 };
 
 const HEIGHT_MODIFIER = 10;
@@ -17,8 +17,17 @@ const validateHeight = newHeight => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case MOVE_ROLLER_BLIND: {
-      const heightModifier = action.isGoingUp ? HEIGHT_MODIFIER : -HEIGHT_MODIFIER;
-      return { rollerBlindHeight: validateHeight(state.rollerBlindHeight + heightModifier) };
+      const heightModifier = action.isGoingDown
+        ? HEIGHT_MODIFIER
+        : -HEIGHT_MODIFIER;
+
+      const rollerBlindHeight = validateHeight(
+        state.rollerBlindHeight + heightModifier
+      );
+
+      return {
+        rollerBlindHeight
+      };
     }
     default:
       return state;

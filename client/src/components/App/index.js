@@ -5,11 +5,11 @@ import store from '../../store';
 import AppView from './AppView';
 
 export default class AppContainer extends React.Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <AppView/>
-            </Provider>
-        )
-    }
+  render() {
+    return (
+      <Provider store={store}>
+        <AppView />
+      </Provider>
+    );
+  }
 }

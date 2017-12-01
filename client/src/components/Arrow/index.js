@@ -4,7 +4,7 @@ import { moveRollerBlind } from '../../actions/action';
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onClick: () => dispatch(moveRollerBlind(props.isGoingUp)),
+    onClick: () => dispatch(moveRollerBlind(props.isGoingDown))
   };
 };
 
