@@ -1,0 +1,1 @@
+export const MOVE_ROLLER_BLIND = 'MOVE_ROLLER_BLIND';
