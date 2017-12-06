@@ -3,9 +3,16 @@ const EtherPort = require('etherport');
 
 const board = new j5.Board({
   port: new EtherPort(3030),
-  timeout: 1e5
+  timeout: 1e5,
+  repl: false,
 });
+
+console.log('START LISTENING SERVER');
 
 board.on('ready', function() {
   console.log('CONNECTION HAS BEEN SUCCESSFULLY ESTABLISHED');
+});
+
+board.on('error', function(error) {
+  console.log(error);
 });

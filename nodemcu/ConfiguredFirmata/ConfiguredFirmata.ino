@@ -88,7 +88,7 @@
 #define SERIAL_DEBUG
 #include "utility/firmataDebug.h"
 
-#define MAX_CONN_ATTEMPTS 20  // [500 ms] -> 10 s
+#define MAX_CONN_ATTEMPTS 20 // [500 ms] -> 10 s
 
 /*==============================================================================
  * WIFI CONFIGURATION
@@ -131,7 +131,7 @@
 #include <WiFi101.h>
 #include "utility/WiFiClientStream.h"
 #include "utility/WiFiServerStream.h"
-  #define WIFI_LIB_INCLUDED
+#define WIFI_LIB_INCLUDED
 #endif
 
 /*
@@ -151,11 +151,11 @@
 #include <WiFi.h>
 #include "utility/WiFiClientStream.h"
 #include "utility/WiFiServerStream.h"
-  #ifdef WIFI_LIB_INCLUDED
-  #define MULTIPLE_WIFI_LIB_INCLUDES
-  #else
-  #define WIFI_LIB_INCLUDED
-  #endif
+#ifdef WIFI_LIB_INCLUDED
+#define MULTIPLE_WIFI_LIB_INCLUDES
+#else
+#define WIFI_LIB_INCLUDED
+#endif
 #endif
 
 /*
@@ -179,25 +179,22 @@
 #include <ESP8266WiFi.h>
 #include "utility/WiFiClientStream.h"
 #include "utility/WiFiServerStream.h"
-  #ifdef WIFI_LIB_INCLUDED
-  #define MULTIPLE_WIFI_LIB_INCLUDES
-  #else
-  #define WIFI_LIB_INCLUDED
-  #endif
+#ifdef WIFI_LIB_INCLUDED
+#define MULTIPLE_WIFI_LIB_INCLUDES
+#else
+#define WIFI_LIB_INCLUDED
 #endif
-
+#endif
 
 // STEP 2 [OPTIONAL for all boards and shields]
 // By default the board/shield is configured as a TCP server.
 // If you want to setup you board/shield as a TCP client, uncomment the following define and
 // replace the REMOTE_SERVER_IP address below with the IP address of your remote server.
-#define REMOTE_SERVER_IP 192, 168, 43, 8
-
+#define REMOTE_SERVER_IP 192, 168, 1, 101
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "AndroidAP";
-
+char ssid[] = "chimichurri";
 
 // STEP 4 [OPTIONAL for all boards and shields]
 // If you want to use a static IP (v4) address, uncomment the line below. You can also change the IP.
@@ -207,11 +204,9 @@ char ssid[] = "AndroidAP";
 //#define SUBNET_MASK        255,255,255,0 // REQUIRED for ESP8266_WIFI, optional for others
 //#define GATEWAY_IP_ADDRESS 0,0,0,0       // REQUIRED for ESP8266_WIFI, optional for others
 
-
 // STEP 5 [REQUIRED for all boards and shields]
 // define your port number here, you will need this to open a TCP connection to your Arduino
 #define NETWORK_PORT 3030
-
 
 // STEP 6 [REQUIRED for all boards and shields]
 // determine your network security type (OPTION A, B, or C). Option A is the most common, and the
@@ -228,9 +223,8 @@ char ssid[] = "AndroidAP";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "twpk8005";
-#endif  //WIFI_WPA_SECURITY
-
+char wpa_passphrase[] = "asdasd123";
+#endif //WIFI_WPA_SECURITY
 
 /*
  * OPTION B: WEP (not supported for ESP8266)
@@ -248,8 +242,7 @@ char wpa_passphrase[] = "twpk8005";
 //Valid indices are [0-3], even if your router/gateway numbers your keys [1-4].
 byte wep_index = 0;
 char wep_key[] = "your_wep_key";
-#endif  //WIFI_WEP_SECURITY
-
+#endif //WIFI_WEP_SECURITY
 
 /*
  * OPTION C: Open network (no security)
@@ -276,11 +269,11 @@ char wep_key[] = "your_wep_key";
 
 #if ((defined(WIFI_NO_SECURITY) && (defined(WIFI_WEP_SECURITY) || defined(WIFI_WPA_SECURITY))) || (defined(WIFI_WEP_SECURITY) && defined(WIFI_WPA_SECURITY)))
 #error "you may not define more than one security type at the same time in wifiConfig.h."
-#endif  //WIFI_* security define check
+#endif //WIFI_* security define check
 
 #if !(defined(WIFI_NO_SECURITY) || defined(WIFI_WEP_SECURITY) || defined(WIFI_WPA_SECURITY))
 #error "you must define a wifi security type in wifiConfig.h."
-#endif  //WIFI_* security define check
+#endif //WIFI_* security define check
 
 #if (defined(ESP8266_WIFI) && !(defined(WIFI_NO_SECURITY) || (defined(WIFI_WPA_SECURITY))))
 #error "you must choose between WIFI_NO_SECURITY and WIFI_WPA_SECURITY"
@@ -291,9 +284,9 @@ char wep_key[] = "your_wep_key";
  *============================================================================*/
 
 #ifdef REMOTE_SERVER_IP
-  WiFiClientStream stream(IPAddress(REMOTE_SERVER_IP), NETWORK_PORT);
+WiFiClientStream stream(IPAddress(REMOTE_SERVER_IP), NETWORK_PORT);
 #else
-  WiFiServerStream stream(NETWORK_PORT);
+WiFiServerStream stream(NETWORK_PORT);
 #endif
 
 /*==============================================================================
@@ -303,19 +296,19 @@ char wep_key[] = "your_wep_key";
 #if defined(WIFI_101) && !defined(ARDUINO_SAMD_MKR1000)
 // ignore SPI pins, pin 5 (reset WiFi101 shield), pin 7 (WiFi handshake) and pin 10 (WiFi SS)
 // also don't ignore SS pin if it's not pin 10. Not needed for Arduino MKR1000.
-#define IS_IGNORE_PIN(p)  ((p) == 10 || (IS_PIN_SPI(p) && (p) != SS) || (p) == 5 || (p) == 7)
+#define IS_IGNORE_PIN(p) ((p) == 10 || (IS_PIN_SPI(p) && (p) != SS) || (p) == 5 || (p) == 7)
 
 #elif defined(ARDUINO_WIFI_SHIELD) && defined(__AVR_ATmega32U4__)
 // ignore SPI pins, pin 4 (SS for SD-Card on WiFi-shield), pin 7 (WiFi handshake) and pin 10 (WiFi SS)
 // On Leonardo, pin 24 maps to D4 and pin 28 maps to D10
-#define IS_IGNORE_PIN(p)  ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10 || (p) == 24 || (p) == 28)
+#define IS_IGNORE_PIN(p) ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10 || (p) == 24 || (p) == 28)
 
 #elif defined(ARDUINO_WIFI_SHIELD)
 // ignore SPI pins, pin 4 (SS for SD-Card on WiFi-shield), pin 7 (WiFi handshake) and pin 10 (WiFi SS)
-#define IS_IGNORE_PIN(p)  ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10)
+#define IS_IGNORE_PIN(p) ((IS_PIN_SPI(p) || (p) == 4) || (p) == 7 || (p) == 10)
 
 #elif defined(ESP8266_WIFI) && defined(SERIAL_DEBUG)
-#define IS_IGNORE_PIN(p)  ((p) == 1)
+#define IS_IGNORE_PIN(p) ((p) == 1)
 
 #endif
 
@@ -346,7 +339,7 @@ AnalogOutputFirmata analogOutput;
 #include <ServoFirmata.h>
 ServoFirmata servo;
 // ServoFirmata depends on AnalogOutputFirmata
-#if defined ServoFirmata_h && ! defined AnalogOutputFirmata_h
+#if defined ServoFirmata_h && !defined AnalogOutputFirmata_h
 #error AnalogOutputFirmata must be included to use ServoFirmata
 #endif
 
@@ -395,7 +388,6 @@ FirmataScheduler scheduler;
 FirmataReporting reporting;
 #endif
 
-
 #ifdef STATIC_IP_ADDRESS
 IPAddress local_ip(STATIC_IP_ADDRESS);
 #endif
@@ -419,13 +411,17 @@ void systemResetCallback()
 
   // pins with analog capability default to analog input
   // otherwise, pins default to digital output
-  for (byte i = 0; i < TOTAL_PINS; i++) {
-    if (IS_PIN_ANALOG(i)) {
+  for (byte i = 0; i < TOTAL_PINS; i++)
+  {
+    if (IS_PIN_ANALOG(i))
+    {
 #ifdef AnalogInputFirmata_h
       // turns off pull-up, configures everything
       Firmata.setPinMode(i, PIN_MODE_ANALOG);
 #endif
-    } else if (IS_PIN_DIGITAL(i)) {
+    }
+    else if (IS_PIN_DIGITAL(i))
+    {
 #ifdef DigitalOutputFirmata_h
       // sets the output to 0, configures portConfigInputs
       Firmata.setPinMode(i, OUTPUT);
@@ -445,38 +441,40 @@ void systemResetCallback()
  */
 void hostConnectionCallback(byte state)
 {
-  switch (state) {
-    case HOST_CONNECTION_CONNECTED:
-      DEBUG_PRINTLN( "TCP connection established" );
-      break;
-    case HOST_CONNECTION_DISCONNECTED:
-      DEBUG_PRINTLN( "TCP connection disconnected" );
-      break;
+  switch (state)
+  {
+  case HOST_CONNECTION_CONNECTED:
+    DEBUG_PRINTLN("TCP connection established");
+    break;
+  case HOST_CONNECTION_DISCONNECTED:
+    DEBUG_PRINTLN("TCP connection disconnected");
+    break;
   }
 }
 
-void printWifiStatus() {
-  if ( WiFi.status() != WL_CONNECTED )
+void printWifiStatus()
+{
+  if (WiFi.status() != WL_CONNECTED)
   {
-    DEBUG_PRINT( "WiFi connection failed. Status value: " );
-    DEBUG_PRINTLN( WiFi.status() );
+    DEBUG_PRINT("WiFi connection failed. Status value: ");
+    DEBUG_PRINTLN(WiFi.status());
   }
   else
   {
     // print the SSID of the network you're attached to:
-    DEBUG_PRINT( "SSID: " );
-    DEBUG_PRINTLN( WiFi.SSID() );
+    DEBUG_PRINT("SSID: ");
+    DEBUG_PRINTLN(WiFi.SSID());
 
     // print your WiFi shield's IP address:
-    DEBUG_PRINT( "IP Address: " );
+    DEBUG_PRINT("IP Address: ");
     IPAddress ip = WiFi.localIP();
-    DEBUG_PRINTLN( ip );
+    DEBUG_PRINTLN(ip);
 
     // print the received signal strength:
-    DEBUG_PRINT( "signal strength (RSSI): " );
+    DEBUG_PRINT("signal strength (RSSI): ");
     long rssi = WiFi.RSSI();
-    DEBUG_PRINT( rssi );
-    DEBUG_PRINTLN( " dBm" );
+    DEBUG_PRINT(rssi);
+    DEBUG_PRINTLN(" dBm");
   }
 }
 
@@ -489,14 +487,16 @@ void printWifiStatus() {
 void ignorePins()
 {
 #ifdef IS_IGNORE_PIN
-  for (byte i = 0; i < TOTAL_PINS; i++) {
-    if (IS_IGNORE_PIN(i)) {
+  for (byte i = 0; i < TOTAL_PINS; i++)
+  {
+    if (IS_IGNORE_PIN(i))
+    {
       Firmata.setPinMode(i, PIN_MODE_IGNORE);
     }
   }
 #endif
 
-  //Set up controls for the Arduino WiFi Shield SS for the SD Card
+    //Set up controls for the Arduino WiFi Shield SS for the SD Card
 #ifdef ARDUINO_WIFI_SHIELD
   // Arduino WiFi Shield has SD SS wired to D4
   pinMode(PIN_TO_DIGITAL(4), OUTPUT);    // switch off SD card bypassing Firmata
@@ -512,51 +512,52 @@ void ignorePins()
 void initTransport()
 {
   // This statement will clarify how a connection is being made
-  DEBUG_PRINT( "ConfigurableFirmataWiFi will attempt a WiFi connection " );
+  DEBUG_PRINT("ConfigurableFirmataWiFi will attempt a WiFi connection ");
 #if defined(WIFI_101)
-  DEBUG_PRINTLN( "using the WiFi 101 library." );
+  DEBUG_PRINTLN("using the WiFi 101 library.");
 #elif defined(ARDUINO_WIFI_SHIELD)
-  DEBUG_PRINTLN( "using the legacy WiFi library." );
+  DEBUG_PRINTLN("using the legacy WiFi library.");
 #elif defined(ESP8266_WIFI)
-  DEBUG_PRINTLN( "using the ESP8266 WiFi library." );
+  DEBUG_PRINTLN("using the ESP8266 WiFi library.");
   //else should never happen here as error-checking in wifiConfig.h will catch this
-#endif  //defined(WIFI_101)
+#endif //defined(WIFI_101)
 
   // Configure WiFi IP Address
 #ifdef STATIC_IP_ADDRESS
-  DEBUG_PRINT( "Using static IP: " );
-  DEBUG_PRINTLN( local_ip );
+  DEBUG_PRINT("Using static IP: ");
+  DEBUG_PRINTLN(local_ip);
 #if defined(ESP8266_WIFI) || (defined(SUBNET_MASK) && defined(GATEWAY_IP_ADDRESS))
-  stream.config( local_ip , gateway, subnet );
+  stream.config(local_ip, gateway, subnet);
 #else
   // you can also provide a static IP in the begin() functions, but this simplifies
   // ifdef logic in this sketch due to support for all different encryption types.
-  stream.config( local_ip );
+  stream.config(local_ip);
 #endif
 #else
-  DEBUG_PRINTLN( "IP will be requested from DHCP ..." );
+  DEBUG_PRINTLN("IP will be requested from DHCP ...");
 #endif
 
   stream.attach(hostConnectionCallback);
 
   // Configure WiFi security and initiate WiFi connection
 #if defined(WIFI_WEP_SECURITY)
-  DEBUG_PRINT( "Attempting to connect to WEP SSID: " );
+  DEBUG_PRINT("Attempting to connect to WEP SSID: ");
   DEBUG_PRINTLN(ssid);
   stream.begin(ssid, wep_index, wep_key);
 #elif defined(WIFI_WPA_SECURITY)
-  DEBUG_PRINT( "Attempting to connect to WPA SSID: " );
+  DEBUG_PRINT("Attempting to connect to WPA SSID: ");
   DEBUG_PRINTLN(ssid);
   stream.begin(ssid, wpa_passphrase);
-#else                          //OPEN network
-  DEBUG_PRINTLN( "Attempting to connect to open SSID: " );
+#else  //OPEN network
+  DEBUG_PRINTLN("Attempting to connect to open SSID: ");
   DEBUG_PRINTLN(ssid);
   stream.begin(ssid);
 #endif //defined(WIFI_WEP_SECURITY)
-  DEBUG_PRINTLN( "WiFi setup done" );
+  DEBUG_PRINTLN("WiFi setup done");
 
   // Wait for connection to access point to be established.
-  while (WiFi.status() != WL_CONNECTED && ++connectionAttempts <= MAX_CONN_ATTEMPTS) {
+  while (WiFi.status() != WL_CONNECTED && ++connectionAttempts <= MAX_CONN_ATTEMPTS)
+  {
     delay(500);
     DEBUG_PRINT(".");
   }
@@ -593,7 +594,7 @@ void initFirmata()
   firmataExt.addFeature(stepper);
 #endif
 #ifdef AccelStepperFirmata_h
-firmataExt.addFeature(accelStepper);
+  firmataExt.addFeature(accelStepper);
 #endif
 #ifdef SerialFirmata_h
   firmataExt.addFeature(serial);
@@ -615,9 +616,8 @@ firmataExt.addFeature(accelStepper);
 
   // Initialize Firmata to use the WiFi stream object as the transport.
   Firmata.begin(stream);
-  systemResetCallback();  // reset to default config
+  systemResetCallback(); // reset to default config
 }
-
 
 /*==============================================================================
  * SETUP()
@@ -645,22 +645,27 @@ void loop()
 
   /* STREAMREAD - processing incoming message as soon as possible, while still
    * checking digital inputs.  */
-  while (Firmata.available()) {
+  while (Firmata.available())
+  {
     Firmata.processInput();
 #ifdef FirmataScheduler_h
-    if (!Firmata.isParsingMessage()) {
+    if (!Firmata.isParsingMessage())
+    {
       goto runtasks;
     }
   }
-  if (!Firmata.isParsingMessage()) {
-runtasks: scheduler.runTasks();
+  if (!Firmata.isParsingMessage())
+  {
+  runtasks:
+    scheduler.runTasks();
 #endif
   }
 
-  // TODO - ensure that Stream buffer doesn't go over 60 bytes
+    // TODO - ensure that Stream buffer doesn't go over 60 bytes
 
 #ifdef FirmataReporting_h
-  if (reporting.elapsed()) {
+  if (reporting.elapsed())
+  {
 #ifdef AnalogInputFirmata_h
     /* ANALOGREAD - do all analogReads() at the configured sampling interval */
     analogInput.report();
@@ -679,7 +684,7 @@ runtasks: scheduler.runTasks();
   stepper.update();
 #endif
 #ifdef AccelStepperFirmata_h
-accelStepper.update();
+  accelStepper.update();
 #endif
 #ifdef SerialFirmata_h
   serial.update();

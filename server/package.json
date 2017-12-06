@@ -6,14 +6,13 @@
   "main": "test.js",
   "dependencies": {
     "etherport": "^0.2.0",
-    "etherport-client": "^0.1.3",
     "express": "^4.16.2",
     "johnny-five": "^0.11.7"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node ./src/app.js",
-    "test": "node ./src/test-connection.js"
+    "test-connection": "node ./src/test-connection.js"
   },
   "author": "",
   "license": "ISC"
