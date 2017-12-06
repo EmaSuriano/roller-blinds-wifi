@@ -1,7 +1,7 @@
 const SERVER_STATUS = {
-  CONNECTING: 'Trying to establish connection with your roller blind',
-  SUCCESFULL: 'Connection succesfully established',
-  ERROR: 'Something went wrong',
+  CONNECTING: 'CONNECTING',
+  SUCCESFULL: 'SUCCESFULL',
+  ERROR: 'ERROR',
 };
 
 const ERROR_MESSAGE = {

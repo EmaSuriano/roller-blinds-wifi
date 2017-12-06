@@ -1,9 +1,11 @@
 const j5 = require('johnny-five');
 const EtherPort = require('etherport');
+const { getPositionFromCloud, setPositionToCloud } = require('./service');
 const { SERVER_STATUS } = require('./constants');
 const { calculateSteps } = require('./utils');
 
 let status = SERVER_STATUS.CONNECTING;
+let position = getPositionFromCloud();
 let moveMotor;
 
 const board = new j5.Board({
@@ -21,7 +23,7 @@ board.on('ready', function() {
 
   moveMotor = (steps, cb) => {
     const direction =
-      steps > 0 ? js.Stepper.DIRECTION.CW : js.Stepper.DIRECTION.CCW;
+      steps > 0 ? j5.Stepper.DIRECTION.CW : j5.Stepper.DIRECTION.CCW;
 
     return stepper
       .rpm(60)
@@ -41,14 +43,18 @@ board.on('error', function(err) {
 });
 
 exports.getPosition = function() {
-  // TODO: GET POSITION FROM DATABASE/CLOUD
+  return position;
 };
 
-exports.setPosition = function(newPosition) {
-  const steps = calculateSteps(newPosition, position);
-  moveMotor(steps, () => {
-    // TODO: SET POSITION IN DATABASE/CLOUD
-    console.log('Do something here pls');
+exports.setPosition = function(newPosition = position) {
+  return new Promise(resolve => {
+    const steps = calculateSteps(newPosition, position);
+    moveMotor(steps, function() {
+      // TODO: SET POSITION IN DATABASE/CLOUD
+      setPositionToCloud(newPosition);
+      position = newPosition;
+      resolve();
+    });
   });
 };
 
