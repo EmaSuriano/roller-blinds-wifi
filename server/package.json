@@ -12,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "start": "node ./src/app.js",
-    "test-connection": "node ./src/test-connection.js"
+    "test-connection": "node ./src/test-connection.js",
+    "start-json": "json-server --watch ./db.json --port 5000"    
   },
   "author": "",
   "license": "ISC"
