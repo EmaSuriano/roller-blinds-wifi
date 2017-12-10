@@ -190,11 +190,11 @@
 // By default the board/shield is configured as a TCP server.
 // If you want to setup you board/shield as a TCP client, uncomment the following define and
 // replace the REMOTE_SERVER_IP address below with the IP address of your remote server.
-#define REMOTE_SERVER_IP 192, 168, 1, 101
+#define REMOTE_SERVER_IP 192, 168, 1, 3
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "chimichurri";
+char ssid[] = "WiFi-Arnet-sfxa";
 
 // STEP 4 [OPTIONAL for all boards and shields]
 // If you want to use a static IP (v4) address, uncomment the line below. You can also change the IP.
@@ -223,7 +223,7 @@ char ssid[] = "chimichurri";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "asdasd123";
+char wpa_passphrase[] = "iiCXRR9T4WJnY";
 #endif //WIFI_WPA_SECURITY
 
 /*
@@ -693,4 +693,3 @@ void loop()
   // keep the WiFi connection live. Attempts to reconnect automatically if disconnected.
   stream.maintain();
 }
-

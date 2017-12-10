@@ -6,7 +6,9 @@
   "dependencies": {
     "etherport": "^0.2.0",
     "express": "^4.16.2",
-    "johnny-five": "^0.11.7"
+    "johnny-five": "^0.11.7",
+    "nedb": "^1.8.0",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "now": "^8.5.4"

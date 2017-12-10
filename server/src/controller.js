@@ -11,14 +11,15 @@ router
     return res.json({ position });
   })
   .put(function(req, res) {
-    if (model.getStatus() !== SERVER_STATUS.SUCCESFULL) {
-      res.statusMessage = ERROR_MESSAGE.NOT_CONNECTED;
-      return res.sendStatus(400).end();
-    }
-
-    model.setPosition(req.position).then(function() {
-      return res.sendStatus(200);
-    });
+    model
+      .setPosition(req.position)
+      .then(function() {
+        return res.sendStatus(200);
+      })
+      .catch(err => {
+        res.statusMessage = err;
+        return res.sendStatus(400).end();
+      });
   });
 
 router.get('/status', function(req, res) {

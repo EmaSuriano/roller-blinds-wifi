@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Roller blinds socket test</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function () {
+            var socket = io();
+            // $('form').submit(function () {
+            //     var position = $('#myRange').val();
+            //     console.log(position);
+            //     socket.emit('position', position);
+            // });
+            $("#myRange").on("change", function () {
+                socket.emit('position', this.value);
+            });
+            socket.on('position', function (position) {
+                console.log("received position!")
+                $('#currentPosition').html(position);
+                $('#myRange').val(position);
+            });
+
+            socket.on('exception', function (exception) {
+                console.log("received exception!", exception);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <p id="currentPosition" />
+    <form>
+        <input type="range" min="1" max="100" id="myRange">
+    </form>
+</body>
+
+</html>
