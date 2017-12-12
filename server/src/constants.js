@@ -6,6 +6,7 @@ const SERVER_STATUS = {
 
 const ERROR_MESSAGE = {
   NOT_CONNECTED: 'Your roller blinds are not connected yet.',
+  ROLLER_BLINDS_MOVING: 'Your roller blinds are moving right now.',
 };
 
 module.exports = {

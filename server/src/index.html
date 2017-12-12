@@ -8,22 +8,18 @@
     <script>
         $(function () {
             var socket = io();
-            // $('form').submit(function () {
-            //     var position = $('#myRange').val();
-            //     console.log(position);
-            //     socket.emit('position', position);
-            // });
             $("#myRange").on("change", function () {
                 socket.emit('position', this.value);
             });
+
             socket.on('position', function (position) {
-                console.log("received position!")
+                console.log("received position!");
                 $('#currentPosition').html(position);
                 $('#myRange').val(position);
             });
 
             socket.on('exception', function (exception) {
-                console.log("received exception!", exception);
+                console.error("received exception!", exception);
             });
         });
     </script>

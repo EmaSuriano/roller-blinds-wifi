@@ -22,6 +22,10 @@ router
       });
   });
 
+router.get('/', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
 router.get('/status', function(req, res) {
   const status = model.getStatus();
   return res.json({ status });

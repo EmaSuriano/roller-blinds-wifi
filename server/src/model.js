@@ -14,7 +14,7 @@ getPositionFromCloud()
 
 const board = new j5.Board({
   port: new EtherPort(3030),
-  timeout: 1e5
+  timeout: 1e5,
 });
 
 board.on('ready', function() {
@@ -22,12 +22,11 @@ board.on('ready', function() {
   const stepper = new j5.Stepper({
     type: j5.Stepper.TYPE.FOUR_WIRE,
     stepsPerRev: 64,
-    pins: [14, 12, 13, 15]
+    pins: [14, 12, 13, 15],
   });
 
   moveMotor = (steps, cb) => {
-    const direction =
-      steps > 0 ? j5.Stepper.DIRECTION.CW : j5.Stepper.DIRECTION.CCW;
+    const direction = steps > 0 ? j5.Stepper.DIRECTION.CW : j5.Stepper.DIRECTION.CCW;
 
     return stepper
       .rpm(60)
@@ -37,7 +36,7 @@ board.on('ready', function() {
 
   this.repl.inject({
     moveMotor,
-    stepper
+    stepper,
   });
 });
 

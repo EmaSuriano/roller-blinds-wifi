@@ -9,9 +9,8 @@ exports.getPositionFromCloud = function() {
       .limit(1)
       .exec(function(err, docs) {
         if (err) return reject(err);
-        console.log(docs);
         resolve(docs[0].position);
-      })
+      }),
   );
 };
 
