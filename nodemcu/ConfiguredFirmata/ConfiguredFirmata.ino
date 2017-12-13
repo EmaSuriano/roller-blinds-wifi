@@ -10,7 +10,7 @@
 
   Copyright (C) 2006-2008 Hans-Christoph Steiner.  All rights reserved.
   Copyright (C) 2010-2011 Paul Stoffregen.  All rights reserved.
-  Copyright (C) 2009 Shigeru Kobayashi.  All rights reserved.
+  Copyright (C) 2009 Shigeru Kobayash.  All rights reserved.
   Copyright (C) 2013 Norbert Truchsess. All rights reserved.
   Copyright (C) 2014 Nicolas Panel. All rights reserved.
   Copyright (C) 2015-2016 Jesse Frush. All rights reserved.
@@ -190,11 +190,11 @@
 // By default the board/shield is configured as a TCP server.
 // If you want to setup you board/shield as a TCP client, uncomment the following define and
 // replace the REMOTE_SERVER_IP address below with the IP address of your remote server.
-#define REMOTE_SERVER_IP 192, 168, 1, 3
+#define REMOTE_SERVER_IP 192, 168, 1, 101
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "WiFi-Arnet-sfxa";
+char ssid[] = "chimichurri";
 
 // STEP 4 [OPTIONAL for all boards and shields]
 // If you want to use a static IP (v4) address, uncomment the line below. You can also change the IP.
@@ -223,7 +223,7 @@ char ssid[] = "WiFi-Arnet-sfxa";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "iiCXRR9T4WJnY";
+char wpa_passphrase[] = "asdasd123";
 #endif //WIFI_WPA_SECURITY
 
 /*

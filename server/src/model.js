@@ -3,6 +3,7 @@ const EtherPort = require('etherport');
 const { getPositionFromCloud, setPositionToCloud } = require('./service');
 const { SERVER_STATUS, ERROR_MESSAGE } = require('./constants');
 const { calculateSteps } = require('./utils');
+const Stepper = require('./Stepper');
 
 let status = SERVER_STATUS.CONNECTING;
 let position = 0;
@@ -19,20 +20,24 @@ const board = new j5.Board({
 
 board.on('ready', function() {
   status = SERVER_STATUS.SUCCESFULL;
+  // const stepper = Stepper(14, 12, 13, 15);
   const stepper = new j5.Stepper({
     type: j5.Stepper.TYPE.FOUR_WIRE,
-    stepsPerRev: 64,
+    stepsPerRev: 96,
     pins: [14, 12, 13, 15],
   });
 
   moveMotor = (steps, cb) => {
-    const direction = steps > 0 ? j5.Stepper.DIRECTION.CW : j5.Stepper.DIRECTION.CCW;
+    const direction =
+      steps > 0 ? j5.Stepper.DIRECTION.CW : j5.Stepper.DIRECTION.CCW;
 
     return stepper
       .rpm(60)
       .direction(direction)
       .step(steps, cb);
   };
+
+  moveMotor(100, () => moveMotor(-100)); //has to move in CW direction and then CCW
 
   this.repl.inject({
     moveMotor,
