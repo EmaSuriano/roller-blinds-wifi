@@ -9,10 +9,10 @@
         $(function () {
             var socket = io();
             $("#myRange").on("change", function () {
-                socket.emit('position', this.value);
+                socket.emit('SET_POSITION', this.value);
             });
 
-            socket.on('position', function (position) {
+            socket.on('SET_POSITION', function (position) {
                 console.log("received position!");
                 $('#currentPosition').html(position);
                 $('#myRange').val(position);

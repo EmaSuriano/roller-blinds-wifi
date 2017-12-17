@@ -1,15 +1,18 @@
-const model = require('./model');
-const { SERVER_STATUS, ERROR_MESSAGE } = require('./constants');
+const rollerBlind = require('./rollerBlind');
+const { ACTIONS } = require('./constants');
 
 module.exports = function(io) {
   io.on('connection', function(socket) {
-    socket.emit('position', model.getPosition());
+    rollerBlind
+      .getPosition()
+      .then(pos => socket.emit(ACTIONS.SET_POSITION, pos))
+      .catch(err => socket.emit(ACTIONS.SERVER_ERROR, { err }));
 
-    socket.on('position', function(position) {
-      model
+    socket.on(ACTIONS.SET_POSITION, function(position) {
+      rollerBlind
         .setPosition(position)
-        .then(() => io.emit('position', position))
-        .catch(exception => socket.emit('exception', { exception }));
+        .then(pos => io.emit(ACTIONS.SET_POSITION, pos))
+        .catch(err => socket.emit(ACTIONS.SERVER_ERROR, { err }));
     });
   });
 };

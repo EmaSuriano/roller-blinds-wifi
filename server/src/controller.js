@@ -1,5 +1,4 @@
-const model = require('./model');
-const { SERVER_STATUS, ERROR_MESSAGE } = require('./constants');
+const rollerBlind = require('./rollerBlind');
 const express = require('express');
 
 const router = express.Router();
@@ -7,11 +6,11 @@ const router = express.Router();
 router
   .route('/position')
   .get(function(req, res) {
-    const position = model.getPosition();
+    const position = rollerBlind.getPosition();
     return res.json({ position });
   })
   .put(function(req, res) {
-    model
+    rollerBlind
       .setPosition(req.position)
       .then(function() {
         return res.sendStatus(200);
@@ -27,7 +26,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/status', function(req, res) {
-  const status = model.getStatus();
+  const status = rollerBlind.getStatus();
   return res.json({ status });
 });
 
