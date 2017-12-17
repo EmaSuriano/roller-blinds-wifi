@@ -1,24 +1,17 @@
 {
   "name": "roller-blinds-wifi",
   "version": "1.0.0",
-  "description": "This a project made with nodemcu and johnny five to control any roller blinds via Wi-fi",
+  "description":
+    "This a project made with nodemcu and johnny five to control any roller blinds via Wi-fi",
   "main": "test.js",
   "dependencies": {
     "etherport": "^0.2.0",
     "express": "^4.16.2",
     "johnny-five": "^0.11.7"
   },
-  "devDependencies": {
-    "now": "^8.5.4"
-  },
-  "now": {
-    "alias": "roller-blinds-wifi"
-  },
   "scripts": {
     "start": "node ./src/app.js",
-    "test-connection": "node ./src/test-connection.js",
-    "start-json": "json-server --watch ./db.json --port 5000",
-    "deploy": "now --public && now alias"
+    "test-connection": "node ./src/test-connection.js"
   },
   "author": "",
   "license": "ISC"
