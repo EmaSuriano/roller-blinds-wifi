@@ -469,12 +469,6 @@ void FirmataStepper::stepMotor(byte step_num, byte direction)
       digitalWrite(motor_pin_3, LOW);
       digitalWrite(motor_pin_4, HIGH);
       break;
-    default:
-      digitalWrite(motor_pin_1, LOW);
-      digitalWrite(motor_pin_2, LOW);
-      digitalWrite(motor_pin_3, LOW);
-      digitalWrite(motor_pin_4, LOW);
-      break;
     }
   }
 }
