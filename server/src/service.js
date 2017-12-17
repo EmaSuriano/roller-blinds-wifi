@@ -2,7 +2,7 @@ const Datastore = require('nedb');
 const db = new Datastore({ filename: './src/model.db', autoload: true });
 const { functionCallLoggerHOF } = require('./utils');
 
-getPositionFromCloud = () =>
+getPositionFromDB = () =>
   new Promise((resolve, reject) =>
     db
       .find({})
@@ -11,7 +11,7 @@ getPositionFromCloud = () =>
       .exec((err, docs) => (err ? reject(err) : resolve(docs[0].position))),
   );
 
-setPositionToCloud = position =>
+setPositionToDB = position =>
   new Promise((resolve, reject) =>
     db.insert(
       { position, dateTime: Date.now() },
@@ -19,5 +19,7 @@ setPositionToCloud = position =>
     ),
   );
 
-exports.getPositionFromCloud = functionCallLoggerHOF(getPositionFromCloud);
-exports.setPositionToCloud = functionCallLoggerHOF(setPositionToCloud);
+module.exports = {
+  getPositionFromDB: functionCallLoggerHOF(getPositionFromDB),
+  setPositionToDB: functionCallLoggerHOF(setPositionToDB),
+};
