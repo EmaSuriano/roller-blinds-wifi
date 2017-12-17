@@ -1,3 +1,18 @@
+/* 
+  We made a modification inside stepMotor function especifically with FOUR_WIRE motor.
+  This change is because we need to perform the sequence that our stepper motor has. 
+  As we are using 28BYJ-48 its sequence is the following:
+    Step C0 C1 C2 C3
+      1  1  0  0  0
+      2  1  1  0  0
+      3  0  1  0  0
+      4  0  1  1  0
+      5  0  0  1  0
+      6  0  0  1  1
+      7  0  0  0  1
+      8  1  0  0  1
+*/
+
 /**
   FirmataStepper is a simple non-blocking stepper motor library
   for 2 and 4 wire bipolar and unipolar stepper motor drive circuits
