@@ -93,7 +93,7 @@ was correctly connected to my network, so what I did to check this is:
 * If you received all packets sent were received your nodemcu is succesfully
   connected!
 
-## Change utils of FirmataStepper
+## Change utility of FirmataStepper
 
 This step is to properly move our 28BYJ-48, the short explanation is because our motor has a different way of working than the default inside Firmata.
 
@@ -101,5 +101,5 @@ To replace its behaviour we have to:
 
 * Go to Arduino's library folder (In Windows the folder is located in `C:\Users\USERNAME\Documents\Arduino\libraries`)
 * Open ConfigurableFirmata folder
-* Open utils folder
+* Open utility folder
 * Replace FirmataStepper.cpp with the one of this repository utils folder.
