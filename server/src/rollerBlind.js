@@ -1,8 +1,8 @@
 const j5 = require('johnny-five');
 const EtherPort = require('etherport');
-const { getPositionFromDB, setPositionToDB } = require('./service');
-const { SERVER_STATUS, ERROR_MESSAGE } = require('./constants');
-const { calculateSteps, noop } = require('./utils');
+const {getPositionFromDB, setPositionToDB} = require('./service');
+const {SERVER_STATUS, ERROR_MESSAGE} = require('./constants');
+const {calculateSteps, noop} = require('./utils');
 
 let status = SERVER_STATUS.CONNECTING;
 let position = -1;
@@ -56,14 +56,6 @@ const setPosition = (newPosition = position) =>
     }
 
     const steps = calculateSteps(newPosition, position);
-    // TODO: DIVIDE THE TOTAL NUMBERS OF STEPS IN ORDER TO TRACK THE PROGRESS OF THE ROLLER BLINDS
-    // OTHERWISE WHEN THE USER ASK FOR A POSITION  HIGHER/LOWER THAN THE CURRENT, THE APPLICATION SEEMS TO BE FREEZE
-
-    // Thinking again, that wont work properly due to the motor will stop and run multiple times and it'll take a lot of time
-    // The best of all is to know how much time the motor takes to move between a position and another
-    // so we don't interrupt the execution just taking time of how much is taking the moveMotor
-    // meanwhile the moveMover is making the motor spin, we can use setPeriod to communicate with the socket sending the progress (based on the time)
-    // when moveMotor finished we can stop the setPeriod and give to the user the last/current position
 
     moveMotor(steps, function() {
       setPositionToDB(newPosition)
