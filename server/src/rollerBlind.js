@@ -1,43 +1,51 @@
 const j5 = require('johnny-five');
 const EtherPort = require('etherport');
-const {getPositionFromDB, setPositionToDB} = require('./service');
-const {SERVER_STATUS, ERROR_MESSAGE} = require('./constants');
-const {calculateSteps, noop} = require('./utils');
+const { getPositionFromDB, setPositionToDB } = require('./service');
+const { SERVER_STATUS, ERROR_MESSAGE } = require('./constants');
+const { calculateSteps, noop } = require('./utils');
 
 let status = SERVER_STATUS.CONNECTING;
 let position = -1;
 let moveMotor;
 
-const board = new j5.Board({
-  port: new EtherPort(3030),
-  timeout: 1e5,
-});
-
-board.on('ready', function() {
+// FIXME: supa hot fix in order to develop without connected board!
+if (process.env.DISABLE_BOARD) {
+  moveMotor = (steps, cb) => cb();
   status = SERVER_STATUS.SUCCESSFUL;
-
-  const stepper = new j5.Stepper({
-    type: j5.Stepper.TYPE.FOUR_WIRE,
-    stepsPerRev: 96,
-    pins: [14, 12, 13, 15],
+} else {
+  const board = new j5.Board({
+    port: new EtherPort(3030),
+    timeout: 1e5,
   });
 
-  moveMotor = (steps, cb = noop) =>
-    stepper
-      .rpm(300)
-      .direction(steps > 0 ? j5.Stepper.DIRECTION.CCW : j5.Stepper.DIRECTION.CW)
-      .step(Math.abs(steps), cb);
+  board.on('ready', function() {
+    status = SERVER_STATUS.SUCCESSFUL;
 
-  this.repl.inject({
-    moveMotor,
-    stepper,
+    const stepper = new j5.Stepper({
+      type: j5.Stepper.TYPE.FOUR_WIRE,
+      stepsPerRev: 96,
+      pins: [14, 12, 13, 15],
+    });
+
+    moveMotor = (steps, cb = noop) =>
+      stepper
+        .rpm(300)
+        .direction(
+          steps > 0 ? j5.Stepper.DIRECTION.CCW : j5.Stepper.DIRECTION.CW,
+        )
+        .step(Math.abs(steps), cb);
+
+    this.repl.inject({
+      moveMotor,
+      stepper,
+    });
   });
-});
 
-board.on('error', function() {
-  status = SERVER_STATUS.ERROR;
-  throw new Error(ERROR_MESSAGE.CONNECTING_BOARD_ERROR);
-});
+  board.on('error', function() {
+    status = SERVER_STATUS.ERROR;
+    throw new Error(ERROR_MESSAGE.CONNECTING_BOARD_ERROR);
+  });
+}
 
 const getPosition = () =>
   new Promise((resolve, reject) =>

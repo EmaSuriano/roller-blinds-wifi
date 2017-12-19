@@ -6,13 +6,13 @@ module.exports = function(io) {
     rollerBlind
       .getPosition()
       .then(pos => socket.emit(ACTIONS.SET_POSITION, pos))
-      .catch(err => socket.emit(ACTIONS.SERVER_ERROR, { err }));
+      .catch(err => socket.emit(ACTIONS.SERVER_ERROR, err));
 
     socket.on(ACTIONS.SET_POSITION, function(position) {
       rollerBlind
         .setPosition(position)
         .then(pos => io.emit(ACTIONS.SET_POSITION, pos))
-        .catch(err => socket.emit(ACTIONS.SERVER_ERROR, { err }));
+        .catch(err => socket.emit(ACTIONS.SERVER_ERROR, err));
     });
   });
 };
