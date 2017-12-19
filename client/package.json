@@ -1,6 +1,6 @@
 {
-  "name": "RollerBlindsWifi",
-  "version": "0.0.1",
+  "name": "roller-blinds-wifi",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start-native": "node node_modules/react-native/local-cli/cli.js start",
