@@ -12,6 +12,7 @@ let moveMotor;
 if (process.env.DISABLE_BOARD) {
   moveMotor = (steps, cb) => cb();
   status = SERVER_STATUS.SUCCESSFUL;
+  console.log(status);
 } else {
   const board = new j5.Board({
     port: new EtherPort(3030),
@@ -59,6 +60,7 @@ const getPosition = () =>
 
 const setPosition = (newPosition = position) =>
   new Promise((resolve, reject) => {
+    console.log(status);
     if (status !== SERVER_STATUS.SUCCESSFUL) {
       return reject(ERROR_MESSAGE.NOT_CONNECTED);
     }

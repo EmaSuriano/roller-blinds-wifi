@@ -1,7 +1,11 @@
-import { MOVE_ROLLER_BLIND } from '../actions/types';
+import {
+  MOVE_ROLLER_BLIND,
+  SET_ROLLER_BLIND_POSITION,
+  SET_POSITION,
+} from '../actions/types';
 
 const initialState = {
-  rollerBlindHeight: 0
+  rollerBlindHeight: 0,
 };
 
 const HEIGHT_MODIFIER = 10;
@@ -22,13 +26,17 @@ export default function(state = initialState, action) {
         : -HEIGHT_MODIFIER;
 
       const rollerBlindHeight = validateHeight(
-        state.rollerBlindHeight + heightModifier
+        state.rollerBlindHeight + heightModifier,
       );
 
       return {
-        rollerBlindHeight
+        rollerBlindHeight,
       };
     }
+    case SET_POSITION:
+      return {
+        rollerBlindHeight: action.position,
+      };
     default:
       return state;
   }

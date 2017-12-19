@@ -5,14 +5,26 @@ module.exports = function(io) {
   io.on('connection', function(socket) {
     rollerBlind
       .getPosition()
-      .then(pos => socket.emit(ACTIONS.SET_POSITION, pos))
+      .then(position =>
+        socket.emit('action', { type: ACTIONS.SET_POSITION, position }),
+      )
       .catch(err => socket.emit(ACTIONS.SERVER_ERROR, err));
 
-    socket.on(ACTIONS.SET_POSITION, function(position) {
-      rollerBlind
-        .setPosition(position)
-        .then(pos => io.emit(ACTIONS.SET_POSITION, pos))
-        .catch(err => socket.emit(ACTIONS.SERVER_ERROR, err));
+    socket.on('action', action => {
+      if (action.type === ACTIONS.WANT_SET_POSITION) {
+        console.log('receiving set position');
+        rollerBlind
+          .setPosition(action.position)
+          .then(position => {
+            console.log('emiting position!');
+            io.emit('action', { type: ACTIONS.SET_POSITION, position });
+          })
+          .catch(err =>
+            socket.emit('action', { type: ACTIONS.SERVER_ERROR, err }),
+          );
+      }
     });
+
+    // socket.on(ACTIONS.WANT_SET_POSITION, function(position) {});
   });
 };
