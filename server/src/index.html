@@ -18,6 +18,8 @@
                 $('#myRange').val(position);
             });
 
+            socket.on('SERVER_ERROR', console.error);
+
             socket.on('exception', function (exception) {
                 console.error("received exception!", exception);
             });
