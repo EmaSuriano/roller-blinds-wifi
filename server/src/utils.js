@@ -22,10 +22,10 @@ const functionCallLoggerHOF = func => params => {
 
 const noop = () => {};
 
-const withDebug = func => (DEBUG ? functionCallLoggerHOF(func) : func);
+const withDebugHOF = func => (DEBUG ? functionCallLoggerHOF(func) : func);
 
 module.exports = {
   calculateSteps,
-  withDebug,
+  withDebugHOF,
   noop,
 };

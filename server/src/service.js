@@ -1,5 +1,5 @@
 const datastore = require('nedb-promise');
-const { withDebug } = require('./utils');
+const { withDebugHOF } = require('./utils');
 const { ERROR_MESSAGE, DEBUG } = require('./constants');
 
 let db = datastore({ filename: './src/model.db', autoload: true });
@@ -30,6 +30,6 @@ setPositionToDB = async position => {
 };
 
 module.exports = {
-  getPositionFromDB: withDebug(getPositionFromDB),
-  setPositionToDB: withDebug(setPositionToDB),
+  getPositionFromDB: withDebugHOF(getPositionFromDB),
+  setPositionToDB: withDebugHOF(setPositionToDB),
 };
