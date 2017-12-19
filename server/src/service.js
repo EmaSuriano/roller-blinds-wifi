@@ -1,23 +1,33 @@
-const Datastore = require('nedb');
-const db = new Datastore({ filename: './src/model.db', autoload: true });
+const datastore = require('nedb-promise');
 const { functionCallLoggerHOF } = require('./utils');
+const { ERROR_MESSAGE } = require('./constants');
 
-getPositionFromDB = () =>
-  new Promise((resolve, reject) =>
-    db
-      .find({})
+let db = datastore({ filename: './src/model.db', autoload: true });
+
+getPositionFromDB = async () => {
+  try {
+    const document = await db
+      .cfind({})
       .sort({ dateTime: -1 })
       .limit(1)
-      .exec((err, docs) => (err ? reject(err) : resolve(docs[0].position))),
-  );
+      .exec();
 
-setPositionToDB = position =>
-  new Promise((resolve, reject) =>
-    db.insert(
-      { position, dateTime: Date.now() },
-      (err, docs) => (err ? reject(err) : resolve(position)),
-    ),
-  );
+    return document[0].position;
+  } catch (error) {
+    throw new Error(ERROR_MESSAGE.DATABASE_GET_ERROR);
+  }
+};
+
+setPositionToDB = async position => {
+  try {
+    const newPositionRecord = { position, dateTime: Date.now() };
+    await db.insert(newPositionRecord);
+
+    return position;
+  } catch (error) {
+    throw new Error(ERROR_MESSAGE.DATABASE_INSERT_ERROR);
+  }
+};
 
 module.exports = {
   getPositionFromDB: functionCallLoggerHOF(getPositionFromDB),
