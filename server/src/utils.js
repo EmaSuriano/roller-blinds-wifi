@@ -1,3 +1,5 @@
+const { DEBUG } = require('./constants');
+
 const STEPPER_MOTOR_STEPS_ONE_LAP = 4096;
 const TOTAL_STEPS_FULL_BLINDS = STEPPER_MOTOR_STEPS_ONE_LAP * 8;
 
@@ -20,8 +22,10 @@ const functionCallLoggerHOF = func => params => {
 
 const noop = () => {};
 
+const withDebug = func => (DEBUG ? functionCallLoggerHOF(func) : func);
+
 module.exports = {
   calculateSteps,
-  functionCallLoggerHOF,
+  withDebug,
   noop,
 };
