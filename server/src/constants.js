@@ -34,7 +34,7 @@ const MOTOR_PINS = process.env.MOTOR_PIN || DEFAULT_ENV.MOTOR_PINS;
 
 const ETHERPORT_PORT = process.env.ETHERPORT_PORT || DEFAULT_ENV.ETHERPORT_PORT;
 
-const SHOW_LOG = process.env.DEBUG || DEFAULT_ENV.DEBUG;
+const DEBUG = process.env.DEBUG || DEFAULT_ENV.DEBUG;
 
 module.exports = {
   SERVER_STATUS,
@@ -43,5 +43,5 @@ module.exports = {
   SERVER_PORT,
   MOTOR_PINS,
   ETHERPORT_PORT,
-  SHOW_LOG,
+  DEBUG,
 };
