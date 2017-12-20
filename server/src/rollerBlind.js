@@ -1,12 +1,4 @@
 const storage = require('./storage');
-const {
-  SERVER_STATUS,
-  ERROR_MESSAGE,
-  ETHERPORT_PORT,
-  MOTOR_PINS,
-  EXCEPTIONS,
-  DISABLE_BOARD,
-} = require('./constants');
 const Board = require('./board');
 const { calculateSteps, noop } = require('./utils');
 
