@@ -12,16 +12,18 @@ const ERROR_MESSAGE = {
   DATABASE_GET_ERROR: "Can't get your roller blinds position from database",
   DATABASE_INSERT_ERROR: "Can't save your roller blinds position into database",
   UNHANDLED_ERROR: 'Something weird happenned',
+  UNRECOGNIZED_ACTION:
+    'Socket has received an invalid action, nothing was done ...',
 };
 
 const ACTIONS = {
-  WANT_SET_POSITION: 'server/SET_POSITION',
+  SET_POSITION_REQUEST: 'server/SET_POSITION',
   SET_POSITION: 'SET_POSITION',
   SERVER_ERROR: 'SERVER_ERROR',
 };
 
 const DEFAULT_ENV = {
-  PORT: 3000,
+  PORT: 8000,
   MOTOR_PINS: [14, 12, 13, 15],
   ETHERPORT_PORT: 3030,
   DEBUG: false,

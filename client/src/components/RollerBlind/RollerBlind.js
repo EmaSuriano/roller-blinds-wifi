@@ -9,7 +9,7 @@ const RollerBlind = ({ height, onChange }) => (
     thumbColor="black"
     sliderSize={20}
     verticalSliderHeight="500px"
-    onChange={({ value }) => onChange(value)}
+    onChangeComplete={({ value }) => onChange(value)}
   />
 );
 
