@@ -25,7 +25,7 @@ function Board() {
     this.status = BOARD_STATUS.SUCCESSFUL;
 
     const stepper = new j5.Stepper({
-      type: Stepper.TYPE.FOUR_WIRE,
+      type: j5.Stepper.TYPE.FOUR_WIRE,
       stepsPerRev: 96,
       pins: MOTOR_PINS
     });
@@ -48,11 +48,6 @@ function Board() {
       await moveMotor(steps);
       this.isMoving = false;
     };
-
-    this.repl.inject({
-      moveMotor,
-      stepper
-    });
   });
 
   board.on('error', error => {

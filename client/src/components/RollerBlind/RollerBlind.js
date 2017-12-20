@@ -5,7 +5,7 @@ import ReactSimpleRange from 'react-simple-range';
 class RollerBlind extends Component {
   static propTypes = {
     height: PropTypes.number.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -14,7 +14,7 @@ class RollerBlind extends Component {
   }
 
   state = {
-    localHeight: this.props.height
+    localHeight: this.props.height,
   };
 
   onChange = ({ value }) => {
