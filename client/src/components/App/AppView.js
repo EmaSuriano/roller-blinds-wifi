@@ -4,13 +4,13 @@ import Arrow from '../Arrow';
 import RollerBlind from '../RollerBlind';
 import Notification from '../Notification';
 
-export default () => (
+export default ({ isConnected }) => (
   <div className="container">
     <Title />
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '80% 20%',
+        gridTemplateColumns: '80% 20%'
       }}
     >
       <RollerBlind />
