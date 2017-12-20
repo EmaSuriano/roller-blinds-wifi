@@ -27,7 +27,7 @@ const DEFAULT_ENV = {
   PORT: 8000,
   MOTOR_PINS: [14, 12, 13, 15],
   ETHERPORT_PORT: 3030,
-  DEBUG: false,
+  DEBUG: true,
   DISABLE_BOARD: false,
 };
 

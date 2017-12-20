@@ -10,6 +10,7 @@ const {
 } = require('./constants');
 
 function Board() {
+  console.log('Board suffesfully connected!');
   this.status = BOARD_STATUS.CONNECTING;
   this.isMoving = false;
   this.moveMotor = async () => {

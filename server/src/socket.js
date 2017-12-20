@@ -1,8 +1,10 @@
 const rollerBlind = require('./rollerBlind');
-const { ACTIONS, ERROR_MESSAGE } = require('./constants');
+const { ACTIONS, ERROR_MESSAGE, DEBUG } = require('./constants');
 
 module.exports = io => {
   io.on('connection', async socket => {
+    if (DEBUG) console.log('New connection!');
+
     socket.emit('action', { type: ACTIONS.SOCKET_CONNECTED });
     try {
       const position = await rollerBlind.getPosition();
@@ -15,6 +17,8 @@ module.exports = io => {
     }
 
     socket.on('action', async action => {
+      if (DEBUG) console.log('New action received', action.type);
+
       switch (action.type) {
         case ACTIONS.SET_POSITION_REQUEST:
           try {

@@ -194,7 +194,7 @@
 
 // STEP 3 [REQUIRED for all boards and shields]
 // replace this with your wireless network SSID
-char ssid[] = "Marcos Wifi";
+char ssid[] = "Xperia";
 
 // STEP 4 [OPTIONAL for all boards and shields]
 // If you want to use a static IP (v4) address, uncomment the line below. You can also change the IP.
@@ -223,7 +223,7 @@ char ssid[] = "Marcos Wifi";
 #define WIFI_WPA_SECURITY
 
 #ifdef WIFI_WPA_SECURITY
-char wpa_passphrase[] = "12345678";
+char wpa_passphrase[] = "emajotaese";
 #endif //WIFI_WPA_SECURITY
 
 /*
