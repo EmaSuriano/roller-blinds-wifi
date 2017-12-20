@@ -1,69 +1,28 @@
-const { Board, Stepper } = require('johnny-five');
-const EtherPort = require('etherport');
-const { getPositionFromDB, setPositionToDB } = require('./service');
+const storage = require('./storage');
 const {
   SERVER_STATUS,
   ERROR_MESSAGE,
   ETHERPORT_PORT,
   MOTOR_PINS,
   EXCEPTIONS,
+  DISABLE_BOARD,
 } = require('./constants');
+const Board = require('./board');
 const { calculateSteps, noop } = require('./utils');
 
-let status = SERVER_STATUS.CONNECTING;
-let position = -1;
-let moveMotor = async () => {
-  throw new Error(ERROR_MESSAGE.NOT_CONNECTED);
-};
+const board = new Board();
 
-const board = new Board({
-  port: new EtherPort(ETHERPORT_PORT),
-  timeout: 1e5,
-});
+const getPosition = async () => await storage.getPosition();
 
-board.on('ready', () => {
-  status = SERVER_STATUS.SUCCESSFUL;
-
-  const stepper = new Stepper({
-    type: Stepper.TYPE.FOUR_WIRE,
-    stepsPerRev: 96,
-    pins: MOTOR_PINS,
-  });
-
-  moveMotor = steps =>
-    new Promise(resolve =>
-      stepper
-        .rpm(300)
-        .direction(steps > 0 ? Stepper.DIRECTION.CCW : Stepper.DIRECTION.CW)
-        .step(Math.abs(steps), resolve),
-    );
-
-  this.repl.inject({
-    moveMotor,
-    stepper,
-  });
-});
-
-board.on('error', error => {
-  status = SERVER_STATUS.ERROR;
-  console.error(ERROR_MESSAGE.CONNECTING_BOARD_ERROR);
-});
-
-const getPosition = async () => {
-  const savedPosition = await getPositionFromDB();
-  position = savedPosition;
-  return position;
-};
-
-const setPosition = async (newPosition = position) => {
+const setPosition = async newPosition => {
+  const position = await storage.getPosition();
   const steps = calculateSteps(newPosition, position);
-  await moveMotor(steps);
-  await setPositionToDB(newPosition);
-  position = newPosition;
-  return position;
+  await board.moveMotor(steps);
+  await storage.setPosition(newPosition);
+  return newPosition;
 };
 
-const getStatus = () => status;
+const getStatus = () => board.status;
 
 module.exports = {
   getPosition,

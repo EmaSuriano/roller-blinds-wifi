@@ -6,6 +6,12 @@ const SERVER_STATUS = {
   ERROR: 'ERROR',
 };
 
+const BOARD_STATUS = {
+  CONNECTING: 'CONNECTING',
+  SUCCESSFUL: 'SUCCESSFUL',
+  ERROR: 'ERROR',
+};
+
 const ERROR_MESSAGE = {
   NOT_CONNECTED: 'Your roller blinds are not connected yet.',
   CONNECTING_BOARD_ERROR:
@@ -26,6 +32,7 @@ const DEFAULT_ENV = {
   MOTOR_PINS: [14, 12, 13, 15],
   ETHERPORT_PORT: 3030,
   DEBUG: false,
+  DISABLE_BOARD: false,
 };
 
 const SERVER_PORT = process.env.PORT || DEFAULT_ENV.PORT;
@@ -36,12 +43,16 @@ const ETHERPORT_PORT = process.env.ETHERPORT_PORT || DEFAULT_ENV.ETHERPORT_PORT;
 
 const DEBUG = process.env.DEBUG || DEFAULT_ENV.DEBUG;
 
+const DISABLE_BOARD = process.env.DISABLE_BOARD || DEFAULT_ENV.DISABLE_BOARD;
+
 module.exports = {
   SERVER_STATUS,
+  BOARD_STATUS,
   ERROR_MESSAGE,
   ACTIONS,
   SERVER_PORT,
   MOTOR_PINS,
   ETHERPORT_PORT,
   DEBUG,
+  DISABLE_BOARD,
 };
