@@ -2,12 +2,14 @@ import {
   MOVE_ROLLER_BLIND,
   SET_POSITION,
   SERVER_ERROR,
-  DELETE_NOTIFICATION
+  DELETE_NOTIFICATION,
+  SOCKET_CONNECTED,
 } from '../actions/types';
 
 const initialState = {
   rollerBlindHeight: 0,
-  notifications: []
+  notifications: [],
+  isSocketConnected: false,
 };
 
 const HEIGHT_MODIFIER = 10;
@@ -30,16 +32,21 @@ export default function(state = initialState, action) {
         : -HEIGHT_MODIFIER;
 
       const rollerBlindHeight = validateHeight(
-        state.rollerBlindHeight + heightModifier
+        state.rollerBlindHeight + heightModifier,
       );
 
       return Object.assign({}, state, {
-        rollerBlindHeight
+        rollerBlindHeight,
+      });
+    }
+    case SOCKET_CONNECTED: {
+      return Object.assign({}, state, {
+        isSocketConnected: true,
       });
     }
     case SET_POSITION: {
       return Object.assign({}, state, {
-        rollerBlindHeight: action.position
+        rollerBlindHeight: action.position,
       });
     }
     case SERVER_ERROR: {
@@ -50,18 +57,18 @@ export default function(state = initialState, action) {
           ...state.notifications,
           {
             message: action.error,
-            key: notificationCount
-          }
-        ]
+            key: notificationCount,
+          },
+        ],
       };
     }
     case DELETE_NOTIFICATION: {
       const notifications = state.notifications.filter(
-        ({ key }) => key !== action.id
+        ({ key }) => key !== action.id,
       );
       return {
         ...state,
-        notifications
+        notifications,
       };
     }
     default:
