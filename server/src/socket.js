@@ -18,8 +18,11 @@ module.exports = io => {
       switch (action.type) {
         case ACTIONS.SET_POSITION_REQUEST:
           try {
-            const pos = await rollerBlind.setPosition(newPosition);
-            io.emit('action', { type: ACTIONS.SET_POSITION, position });
+            const newPosition = await rollerBlind.setPosition(action.position);
+            io.emit('action', {
+              type: ACTIONS.SET_POSITION,
+              position: newPosition,
+            });
           } catch (error) {
             socket.emit('action', {
               type: ACTIONS.SERVER_ERROR,

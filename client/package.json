@@ -12,6 +12,7 @@
     "react-dom": "15.4",
     "react-native": "0.41.2",
     "react-native-button": "^1.7.1",
+    "react-notification": "^6.8.2",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
     "react-simple-range": "^1.6.0",
