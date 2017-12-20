@@ -29,42 +29,21 @@ class RollerBlind extends Component {
     state = {
         position: 15,
         localHeight: this.props.height,
-        style: 'none',
     };
 
     render() {
       return (
           <div>
-              <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  backgroundColor: '#A700DA',
-                  height: '20px',
-                  width: '200px',
-                  borderRadius: '10px 10px 0 0',
-                  boxShadow: '0 3px 5px #333',
-              }}/>
+              <div className="rollerTop" />
               <div
                   onDragStart={this.startDrag}
                   onDrag={this.onDrag}
                   onDragEnd={this.endDrag}
-                  className={this.props.style}
-                  style={{
-                      height: this.state.position,
-                      width: '200px',
-                      backgroundColor: '#E2E2E2',
-                      boxShadow: '0 3px 5px #333',
-                      position: 'absolute',
-                  }}
+                  className="roller"
+                  style={{ height: this.state.position }}
                   draggable
               >
-                  <div style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'flex-end',
-                      height: '100%',
-                  }}>
+                  <div className="rollerEnd">
                       ...
                   </div>
               </div>
