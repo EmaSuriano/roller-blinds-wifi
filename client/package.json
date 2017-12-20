@@ -7,11 +7,13 @@
     "start-web": "react-scripts start"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "prop-types": "^15.5.10",
     "react": "15.4.2",
     "react-dom": "15.4",
     "react-native": "0.41.2",
     "react-native-button": "^1.7.1",
+    "react-native-fa-icons": "^3.0.1",
     "react-notification": "^6.8.2",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
