@@ -1,43 +1,75 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactSimpleRange from 'react-simple-range';
 
 class RollerBlind extends Component {
-  static propTypes = {
-    height: PropTypes.number.isRequired,
-    onChange: PropTypes.func.isRequired
-  };
+    static propTypes = {
+        height: PropTypes.number.isRequired,
+        onChange: PropTypes.func.isRequired,
+    };
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    this.setState({ localHeight: nextProps.height });
-  }
+    onDrag = event => {
+        const position = event.clientY - 200;
+        if (position < 15 || position > 315 ) return;
+        this.setState({ position });
+    };
 
-  state = {
-    localHeight: this.props.height
-  };
+    startDrag = event => {
+        event.dataTransfer.setDragImage(new Image(), 0, 0);
+    };
 
-  onChange = ({ value }) => {
-    this.setState({ localHeight: value });
-    this.props.onChange(value);
-  };
+    endDrag = event => {
+        const position = event.clientY - 200;
+        this.props.onChange((position-15)/3);
+    };
 
-  isEnable = () => this.props.height === this.state.localHeight;
+    componentWillMount() {
+        this.setState({ position: (this.props.height*3)+15 })
+    }
 
-  render() {
-    return this.isEnable() ? (
-      <ReactSimpleRange
-        vertical
-        value={this.state.localHeight}
-        trackColor="black"
-        thumbColor="black"
-        sliderSize={20}
-        verticalSliderHeight="500px"
-        onChangeComplete={this.onChange}
-      />
-    ) : (
-      <p>Is Disabled</p>
-    );
+    state = {
+        position: 15,
+        localHeight: this.props.height,
+        style: 'none',
+    };
+
+    render() {
+      return (
+          <div>
+              <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  backgroundColor: '#A700DA',
+                  height: '20px',
+                  width: '200px',
+                  borderRadius: '10px 10px 0 0',
+                  boxShadow: '0 3px 5px #333',
+              }}/>
+              <div
+                  onDragStart={this.startDrag}
+                  onDrag={this.onDrag}
+                  onDragEnd={this.endDrag}
+                  className={this.props.style}
+                  style={{
+                      height: this.state.position,
+                      width: '200px',
+                      backgroundColor: '#E2E2E2',
+                      boxShadow: '0 3px 5px #333',
+                      position: 'absolute',
+                  }}
+                  draggable
+              >
+                  <div style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'flex-end',
+                      height: '100%',
+                  }}>
+                      ...
+                  </div>
+              </div>
+          </div>
+      )
   }
 }
 
