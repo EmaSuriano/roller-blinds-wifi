@@ -1,7 +1,13 @@
-import { MOVE_ROLLER_BLIND } from '../actions/types';
+import {
+  MOVE_ROLLER_BLIND,
+  SET_POSITION,
+  SERVER_ERROR,
+  DELETE_NOTIFICATION,
+} from '../actions/types';
 
 const initialState = {
-  rollerBlindHeight: 0
+  rollerBlindHeight: 0,
+  notifications: [],
 };
 
 const HEIGHT_MODIFIER = 10;
@@ -14,6 +20,8 @@ const validateHeight = newHeight => {
   return newHeight;
 };
 
+let notificationCount = 0;
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case MOVE_ROLLER_BLIND: {
@@ -22,11 +30,37 @@ export default function(state = initialState, action) {
         : -HEIGHT_MODIFIER;
 
       const rollerBlindHeight = validateHeight(
-        state.rollerBlindHeight + heightModifier
+        state.rollerBlindHeight + heightModifier,
       );
 
+      return Object.assign({}, state, {
+        rollerBlindHeight,
+      });
+    }
+    case SET_POSITION: {
+      return Object.assign({}, state, {
+        rollerBlindHeight: action.position,
+      });
+    }
+    case SERVER_ERROR: {
+      notificationCount++;
       return {
-        rollerBlindHeight
+        ...state,
+        notifications: [
+          ...state.notifications,
+          {
+            message: action.error,
+            key: notificationCount,
+          },
+        ],
+      };
+    }
+    case DELETE_NOTIFICATION: {
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          ({ key }) => key !== action.id,
+        ),
       };
     }
     default:

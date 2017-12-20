@@ -13,7 +13,7 @@
     "socket.io": "^2.0.4"
   },
   "scripts": {
-    "start": "node ./src/app.js $DISABLE_BOARD",
+    "start": "node ./src/app.js",
     "test-connection": "node ./src/test-connection.js"
   },
   "author": "",

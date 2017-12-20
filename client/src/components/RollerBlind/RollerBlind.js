@@ -1,18 +1,16 @@
 import React from 'react';
+import ReactSimpleRange from 'react-simple-range';
 
-const RollerBlind = ({ height }) => (
-  <div
-    style={{
-      height: 550,
-      display: 'flex',
-      justifyContent: 'center',
-      backgroundColor: '#ffffffa8',
-      borderRadius: 20,
-      padding: 10
-    }}
-  >
-    <h1 style={{ 'margin-top': height * 5 }}>The height is {height}</h1>
-  </div>
+const RollerBlind = ({ height, onChange }) => (
+  <ReactSimpleRange
+    vertical
+    value={height}
+    trackColor="black"
+    thumbColor="black"
+    sliderSize={20}
+    verticalSliderHeight="500px"
+    onChangeComplete={({ value }) => onChange(value)}
+  />
 );
 
 export default RollerBlind;
