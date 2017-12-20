@@ -9,31 +9,30 @@ module.exports = io => {
     } catch (error) {
       socket.emit('action', {
         type: ACTIONS.SERVER_ERROR,
-        error: error.message,
+        error: error.message
       });
     }
 
     socket.on('action', async action => {
-      console.log('Action received', action.type);
       switch (action.type) {
         case ACTIONS.SET_POSITION_REQUEST:
           try {
             const newPosition = await rollerBlind.setPosition(action.position);
             io.emit('action', {
               type: ACTIONS.SET_POSITION,
-              position: newPosition,
+              position: newPosition
             });
           } catch (error) {
             socket.emit('action', {
               type: ACTIONS.SERVER_ERROR,
-              error: error.message,
+              error: error.message
             });
           }
           break;
         default:
           socket.emit('action', {
             type: ACTIONS.SERVER_ERROR,
-            error: ERROR_MESSAGE.UNRECOGNIZED_ACTION,
+            error: ERROR_MESSAGE.UNRECOGNIZED_ACTION
           });
           break;
       }

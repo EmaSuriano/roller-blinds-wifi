@@ -6,7 +6,7 @@ const {
   ETHERPORT_PORT,
   MOTOR_PINS,
   EXCEPTIONS,
-  DISABLE_BOARD,
+  DISABLE_BOARD
 } = require('./constants');
 
 function Board() {
@@ -18,7 +18,7 @@ function Board() {
 
   const board = new j5.Board({
     port: new EtherPort(ETHERPORT_PORT),
-    timeout: 1e5,
+    timeout: 1e5
   });
 
   board.on('ready', () => {
@@ -27,7 +27,7 @@ function Board() {
     const stepper = new j5.Stepper({
       type: Stepper.TYPE.FOUR_WIRE,
       stepsPerRev: 96,
-      pins: MOTOR_PINS,
+      pins: MOTOR_PINS
     });
 
     moveMotor = steps =>
@@ -35,9 +35,9 @@ function Board() {
         stepper
           .rpm(300)
           .direction(
-            steps > 0 ? j5.Stepper.DIRECTION.CCW : j5.Stepper.DIRECTION.CW,
+            steps > 0 ? j5.Stepper.DIRECTION.CCW : j5.Stepper.DIRECTION.CW
           )
-          .step(Math.abs(steps), resolve),
+          .step(Math.abs(steps), resolve)
       );
 
     this.moveMotor = async steps => {
@@ -51,7 +51,7 @@ function Board() {
 
     this.repl.inject({
       moveMotor,
-      stepper,
+      stepper
     });
   });
 
@@ -66,7 +66,8 @@ function BoardDisable() {
   this.status = BOARD_STATUS;
   this.isMoving = false;
 
-  const moveMotor = () => new Promise(resolve => setTimeout(resolve, 1000));
+  const moveMotor = steps =>
+    new Promise(resolve => setTimeout(resolve, Math.abs(steps)));
 
   this.moveMotor = async steps => {
     if (this.isMoving === true) {
