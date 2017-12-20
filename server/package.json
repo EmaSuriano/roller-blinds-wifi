@@ -14,8 +14,12 @@
   },
   "scripts": {
     "start": "node ./src/app.js",
+    "start-disable": "cross-env DISABLE_BOARD=true node ./src/app.js",
     "test-connection": "node ./src/test-connection.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^5.1.1"
+  }
 }
