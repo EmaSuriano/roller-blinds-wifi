@@ -9,10 +9,8 @@ const board = new j5.Board({
 
 console.log('START LISTENING SERVER');
 
-board.on('ready', function() {
-  console.log('CONNECTION HAS BEEN SUCCESSFULLY ESTABLISHED');
-});
+board.on('ready', () =>
+  console.log('CONNECTION HAS BEEN SUCCESSFULLY ESTABLISHED'),
+);
 
-board.on('error', function(error) {
-  console.log(error);
-});
+board.on('error', console.error);
