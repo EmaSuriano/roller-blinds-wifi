@@ -1,11 +1,3 @@
-// import { buildException } from './utils';
-
-const SERVER_STATUS = {
-  CONNECTING: 'CONNECTING',
-  SUCCESSFUL: 'SUCCESSFUL',
-  ERROR: 'ERROR',
-};
-
 const BOARD_STATUS = {
   CONNECTING: 'CONNECTING',
   SUCCESSFUL: 'SUCCESSFUL',
@@ -46,7 +38,6 @@ const DEBUG = process.env.DEBUG || DEFAULT_ENV.DEBUG;
 const DISABLE_BOARD = process.env.DISABLE_BOARD || DEFAULT_ENV.DISABLE_BOARD;
 
 module.exports = {
-  SERVER_STATUS,
   BOARD_STATUS,
   ERROR_MESSAGE,
   ACTIONS,
