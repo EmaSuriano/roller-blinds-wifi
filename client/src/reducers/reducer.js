@@ -59,6 +59,7 @@ export default function(state = initialState, action) {
     case SERVER_ERROR: {
       return {
         ...state,
+        isWaitingResponse: false,
         notifications: [
           ...state.notifications,
           {
