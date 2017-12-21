@@ -4,7 +4,7 @@ html {
 
 body {
   height: 100%;
-  background-color: #63008C;
+  background-color: #63008c;
 }
 
 .container {
@@ -40,9 +40,8 @@ body {
   border-radius: 16px 16px 0 0;
 }
 
-.roller {
-  width: 200px;
-  position: absolute;
+.rollerContainer {
+  transition: height 0.15s ease-out;
 }
 
 .rollerEnd {
@@ -65,5 +64,4 @@ body {
   transition: height 0.15s ease-out;
   height: calc(100% - 25px);
   border-radius: 0 0 16px 16px;
-
 }

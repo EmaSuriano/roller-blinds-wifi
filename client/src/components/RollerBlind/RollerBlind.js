@@ -20,7 +20,7 @@ class RollerBlind extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.isDisable)
-      this.setState({ position: nextProps.height * 3.5 + MIN_HEIGHT });
+      this.setState({ position: nextProps.height * 3 + MIN_HEIGHT });
   }
 
   onDrag = event => {
@@ -43,7 +43,8 @@ class RollerBlind extends Component {
   endDrag = event => {
     if (this.props.isDisable) return this.props.showError();
     const position = this.validatePosition(event.clientY - INITIAL_HEIGHT);
-    const roundedPosition = Math.round(position / 3.5 - MAX_HEIGHT);
+    debugger;
+    const roundedPosition = Math.round((position - MIN_HEIGHT) / 3);
     return this.props.onChange(roundedPosition);
   };
 
