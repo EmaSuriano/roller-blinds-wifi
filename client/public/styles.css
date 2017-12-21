@@ -4,7 +4,7 @@ html {
 
 body {
   height: 100%;
-  background-color: #e2e2e2;
+  background-color: #63008C;
 }
 
 .container {
@@ -13,7 +13,7 @@ body {
 }
 
 .title {
-  color: black;
+  color: #e2e2e2;
   font-size: 32px;
   margin-bottom: 32px;
   font-family: monospace;
@@ -37,21 +37,33 @@ body {
   background-color: #a700da;
   height: 20px;
   width: 200px;
-  border-radius: 10px 10px 0 0;
-  box-shadow: 0 3px 5px #333;
+  border-radius: 16px 16px 0 0;
 }
 
 .roller {
   width: 200px;
-  background-color: #e2e2e2;
-  box-shadow: 0 3px 5px #333;
   position: absolute;
-  transition: height 0.15s ease-out;
 }
 
 .rollerEnd {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  height: 100%;
+}
+
+.dragButton {
+  background-color: #e2e2e2;
+  width: 25px;
+  border-radius: 1px 1px 22px 22px;
+  color: #e2e2e2;
+}
+
+.internalDrag {
+}
+
+.internalRoller {
+  background-color: #e2e2e2;
+  transition: height 0.15s ease-out;
+  height: calc(100% - 25px);
+  border-radius: 0 0 16px 16px;
+
 }
