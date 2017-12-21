@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const INITIAL_HEIGHT = 200;
-const MIN_HEIGHT = 15;
-const MAX_HEIGHT = 315;
+const MIN_HEIGHT = 50;
+const MAX_HEIGHT = 350;
 const TOTAL_HEIGHT = 300;
 
 class RollerBlind extends Component {
@@ -14,12 +14,12 @@ class RollerBlind extends Component {
   };
 
   state = {
-    position: 15,
+    position: MIN_HEIGHT,
   };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.isDisable)
-      this.setState({ position: nextProps.height * 3 + 15 });
+      this.setState({ position: nextProps.height * 3.5 + MIN_HEIGHT});
   }
 
   onDrag = event => {
@@ -42,7 +42,8 @@ class RollerBlind extends Component {
   endDrag = event => {
     if (this.props.isDisable) return;
     const position = this.validatePosition(event.clientY - INITIAL_HEIGHT);
-    return this.props.onChange((position - MIN_HEIGHT) / 3);
+    const roundedPosition = Math.round(position/3.5 - MAX_HEIGHT);
+    return this.props.onChange(roundedPosition);
   };
 
   render() {
@@ -53,11 +54,14 @@ class RollerBlind extends Component {
           onDragStart={this.startDrag}
           onDrag={this.onDrag}
           onDragEnd={this.endDrag}
-          className="roller"
+          className="rollerContainer"
           style={{ height: this.state.position }}
           draggable
         >
-          <div className="rollerEnd">...</div>
+          <div className="internalRoller" />
+          <div className="rollerEnd">
+              <div className="dragButton">  .</div>
+          </div>
         </div>
       </div>
     );
