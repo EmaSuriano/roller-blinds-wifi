@@ -6,6 +6,7 @@ import {
   DELETE_NOTIFICATION,
   SOCKET_CONNECTED,
   SET_POSITION_REQUEST,
+  APPLICATION_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -56,6 +57,7 @@ export default function(state = initialState, action) {
         isWaitingResponse: false,
       });
     }
+    case APPLICATION_ERROR:
     case SERVER_ERROR: {
       return {
         ...state,

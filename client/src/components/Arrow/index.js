@@ -1,10 +1,10 @@
 import Arrow from './Arrow';
 import { connect } from 'react-redux';
-import { moveRollerBlind } from '../../actions/action';
+import { moveRollerBlindWithArrow } from '../../actions/action';
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onClick: () => dispatch(moveRollerBlind(props.isGoingDown)),
+    onClick: () => dispatch(moveRollerBlindWithArrow(props.isGoingDown)),
   };
 };
 

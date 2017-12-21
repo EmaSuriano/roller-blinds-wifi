@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 const INITIAL_HEIGHT = 200;
 const MIN_HEIGHT = 15;
 const MAX_HEIGHT = 315;
-const TOTAL_HEIGHT = 300;
 
 class RollerBlind extends Component {
   static propTypes = {
     height: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired,
     isDisable: PropTypes.bool.isRequired,
+    showError: PropTypes.func,
   };
 
   state = {
@@ -40,7 +40,7 @@ class RollerBlind extends Component {
   };
 
   endDrag = event => {
-    if (this.props.isDisable) return;
+    if (this.props.isDisable) return this.props.showError();
     const position = this.validatePosition(event.clientY - INITIAL_HEIGHT);
     return this.props.onChange((position - MIN_HEIGHT) / 3);
   };
