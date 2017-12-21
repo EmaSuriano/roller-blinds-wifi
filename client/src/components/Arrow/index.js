@@ -1,11 +1,11 @@
 import Arrow from './Arrow';
 // import Arrow from './Arrow.native';
 import { connect } from 'react-redux';
-import { moveRollerBlind } from '../../actions/action';
+import { moveRollerBlindWithArrow } from '../../actions/action';
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onClick: () => dispatch(moveRollerBlind(props.isGoingDown)),
+    onClick: () => dispatch(moveRollerBlindWithArrow(props.isGoingDown)),
   };
 };
 

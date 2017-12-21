@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import io from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import reducer from './reducers/reducer';
 
 const socket = io('http://192.168.43.28:8000');
@@ -12,5 +13,5 @@ export default createStore(
   combineReducers({
     reducer,
   }),
-  composeWithDevTools(applyMiddleware(socketIoMiddleware)),
+  composeWithDevTools(applyMiddleware(socketIoMiddleware, thunk)),
 );

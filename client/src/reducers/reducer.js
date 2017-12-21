@@ -1,13 +1,19 @@
+import uuid from 'uuid';
 import {
   MOVE_ROLLER_BLIND,
   SET_POSITION,
   SERVER_ERROR,
   DELETE_NOTIFICATION,
+  SOCKET_CONNECTED,
+  SET_POSITION_REQUEST,
+  APPLICATION_ERROR,
 } from '../actions/types';
 
 const initialState = {
   rollerBlindHeight: 0,
   notifications: [],
+  isWaitingResponse: false,
+  isSocketConnected: false,
 };
 
 const HEIGHT_MODIFIER = 10;
@@ -19,8 +25,6 @@ const validateHeight = newHeight => {
   if (newHeight > MAX_HEIGHT) return MAX_HEIGHT;
   return newHeight;
 };
-
-let notificationCount = 0;
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -37,30 +41,43 @@ export default function(state = initialState, action) {
         rollerBlindHeight,
       });
     }
+    case SET_POSITION_REQUEST: {
+      return Object.assign({}, state, {
+        isWaitingResponse: true,
+      });
+    }
+    case SOCKET_CONNECTED: {
+      return Object.assign({}, state, {
+        isSocketConnected: true,
+      });
+    }
     case SET_POSITION: {
       return Object.assign({}, state, {
         rollerBlindHeight: action.position,
+        isWaitingResponse: false,
       });
     }
+    case APPLICATION_ERROR:
     case SERVER_ERROR: {
-      notificationCount++;
       return {
         ...state,
         notifications: [
           ...state.notifications,
           {
             message: action.error,
-            key: notificationCount,
+            key: uuid.v1(),
+            dismissAfter: 5000,
           },
         ],
       };
     }
     case DELETE_NOTIFICATION: {
+      const notifications = state.notifications.filter(
+        ({ key }) => key !== action.id,
+      );
       return {
         ...state,
-        notifications: state.notifications.filter(
-          ({ key }) => key !== action.id,
-        ),
+        notifications,
       };
     }
     default:
