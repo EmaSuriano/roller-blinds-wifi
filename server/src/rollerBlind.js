@@ -19,5 +19,5 @@ const getStatus = () => board.status;
 module.exports = {
   getPosition,
   setPosition,
-  getStatus
+  getStatus,
 };

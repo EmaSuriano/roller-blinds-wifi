@@ -4,7 +4,7 @@ html {
 
 body {
   height: 100%;
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
 }
 
 .container {
@@ -34,7 +34,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: #A700DA;
+  background-color: #a700da;
   height: 20px;
   width: 200px;
   border-radius: 10px 10px 0 0;
@@ -43,7 +43,7 @@ body {
 
 .roller {
   width: 200px;
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
   box-shadow: 0 3px 5px #333;
   position: absolute;
 }
