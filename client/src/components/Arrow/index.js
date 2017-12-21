@@ -1,4 +1,5 @@
 import Arrow from './Arrow';
+// import Arrow from './Arrow.native';
 import { connect } from 'react-redux';
 import { moveRollerBlindWithArrow } from '../../actions/action';
 
@@ -8,4 +9,8 @@ const mapDispatchToProps = (dispatch, props) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Arrow);
+const mapStateToProps = (state, props) => {
+  return props;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Arrow);
