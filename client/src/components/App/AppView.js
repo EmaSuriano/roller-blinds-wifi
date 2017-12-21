@@ -9,29 +9,33 @@ export default ({ isConnected }) => (
     <Title />
     <div
       style={{
-          display: 'flex',
-          justifyContent: 'space-evenly',
-          height: '100%',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        height: '100%',
       }}
     >
-        <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'space-evenly',
-        }}>
-            <RollerBlind />
-        </div>
-        <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            flexDirection: 'column',
-        }}>
-            <Arrow />
-            <Arrow isGoingDown />
-        </div>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'space-evenly',
+        }}
+      >
+        <RollerBlind />
+      </div>
+      <div
+        style={{
+          width: '100%',
+          height: '300px',
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          flexDirection: 'column',
+        }}
+      >
+        <Arrow />
+        <Arrow isGoingDown />
+      </div>
     </div>
     <Notification />
   </div>

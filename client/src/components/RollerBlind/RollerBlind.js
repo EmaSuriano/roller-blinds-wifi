@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const INITIAL_HEIGHT = 200;
+const MIN_HEIGHT = 15;
+const MAX_HEIGHT = 315;
+const TOTAL_HEIGHT = 300;
+
 class RollerBlind extends Component {
   static propTypes = {
     height: PropTypes.number.isRequired,
@@ -12,26 +17,32 @@ class RollerBlind extends Component {
     position: 15,
   };
 
-  componentWillMount() {
-    this.setState({ position: this.props.height * 3 + 15 });
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isDisable)
+      this.setState({ position: nextProps.height * 3 + 15 });
   }
 
   onDrag = event => {
     if (this.props.isDisable) return;
-    const position = event.clientY - 200;
-    if (position < 15 || position > 315) return;
+    const position = event.clientY - INITIAL_HEIGHT;
+    if (position < MIN_HEIGHT || position > MAX_HEIGHT) return;
     return this.setState({ position });
   };
 
   startDrag = event => {
     event.dataTransfer.setDragImage(new Image(), 0, 0);
-    event.dataTransfer.setData('text/plain', '');
+  };
+
+  validatePosition = position => {
+    if (position < MIN_HEIGHT) return MIN_HEIGHT;
+    if (position > MAX_HEIGHT) return MAX_HEIGHT;
+    return position;
   };
 
   endDrag = event => {
     if (this.props.isDisable) return;
-    const position = event.clientY - 200;
-    return this.props.onChange((position - 15) / 3);
+    const position = this.validatePosition(event.clientY - INITIAL_HEIGHT);
+    return this.props.onChange((position - MIN_HEIGHT) / 3);
   };
 
   render() {
