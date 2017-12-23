@@ -1,4 +1,4 @@
-const rollerBlind = require('./rollerBlind');
+import rollerBlind from './rollerBlind';
 const express = require('express');
 
 const router = express.Router();
@@ -31,4 +31,4 @@ router.get('/status', (req, res) => {
   return res.json({ status });
 });
 
-module.exports = router;
+export default router;

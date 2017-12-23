@@ -76,4 +76,4 @@ function BoardDisable() {
   };
 }
 
-module.exports = DISABLE_BOARD ? BoardDisable : Board;
+export default (DISABLE_BOARD ? BoardDisable : Board);

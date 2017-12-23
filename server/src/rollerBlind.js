@@ -1,5 +1,5 @@
 const storage = require('./storage');
-const Board = require('./board');
+import Board from './board';
 const { calculateSteps, noop } = require('./utils');
 
 const board = new Board();
@@ -16,7 +16,7 @@ const setPosition = async newPosition => {
 
 const getStatus = () => board.status;
 
-module.exports = {
+export default {
   getPosition,
   setPosition,
   getStatus,

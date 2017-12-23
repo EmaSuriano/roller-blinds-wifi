@@ -1,4 +1,4 @@
-const { DEBUG } = require('./constants');
+import { DEBUG } from ('./constants');
 
 const STEPPER_MOTOR_STEPS_ONE_LAP = 4096;
 const TOTAL_STEPS_FULL_BLINDS = STEPPER_MOTOR_STEPS_ONE_LAP * 8;

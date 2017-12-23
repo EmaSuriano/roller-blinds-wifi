@@ -28,7 +28,7 @@ const setPosition = async position => {
   }
 };
 
-module.exports = {
+export default {
   getPosition: withDebugHOF(getPosition),
   setPosition: withDebugHOF(setPosition),
 };

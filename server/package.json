@@ -10,16 +10,23 @@
     "johnny-five": "^0.11.7",
     "nedb": "^1.8.0",
     "nedb-promise": "^2.0.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "start-server-webpack-plugin": "^2.2.0",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "start": "node ./src/app.js",
-    "start-disable": "cross-env DISABLE_BOARD=true node ./src/app.js",
+    "start": "rm -rf ./build && webpack --config webpack.config.server.js",
+    "start-disable": "cross-env DISABLE_BOARD=true npm run start",
     "test-connection": "node ./src/test-connection.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
     "cross-env": "^5.1.1"
   }
 }
