@@ -19,3 +19,4 @@ jspm_packages/
 .idea
 .vscode
 client/android/app/build/
+server/.build
