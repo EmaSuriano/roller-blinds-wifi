@@ -26,17 +26,12 @@ module.exports = {
     new StartServerPlugin('app.js'),
     new webpack.EnvironmentPlugin(['DISABLE_BOARD']),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin({ quiet: true }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin(['build/*.*']),
-    new webpack.DefinePlugin({
-      'process.env': {
-        BUILD_TARGET: JSON.stringify('src'),
-      },
-    }),
+    new CleanWebpackPlugin(['*.*']),
   ],
   output: {
-    path: path.join(__dirname, '.build'),
+    path: path.join(__dirname),
     filename: 'app.js',
   },
   devServer: {

@@ -26,8 +26,8 @@ router
 
 router.get('/', (req, res) => {
   const dirName = __dirname;
-
-  return res.sendFile(dirName + '/index.html');
+  console.log(dirName);
+  return res.sendFile(dirName + '/src/index.html');
 });
 
 router.get('/status', (req, res) => {
