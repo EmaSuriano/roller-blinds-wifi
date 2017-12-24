@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: ['webpack/hot/poll?1000', './src/index'],
@@ -27,6 +28,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new CleanWebpackPlugin(['build/*.*']),
     new webpack.DefinePlugin({
       'process.env': {
         BUILD_TARGET: JSON.stringify('src'),
@@ -36,5 +38,12 @@ module.exports = {
   output: {
     path: path.join(__dirname, '.build'),
     filename: 'app.js',
+  },
+  devServer: {
+    inline: true,
+    port: 8008,
+  },
+  node: {
+    __dirname: false,
   },
 };

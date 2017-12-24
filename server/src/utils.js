@@ -1,4 +1,4 @@
-import { DEBUG } from ('./constants');
+import { DEBUG } from './constants';
 
 const STEPPER_MOTOR_STEPS_ONE_LAP = 4096;
 const TOTAL_STEPS_FULL_BLINDS = STEPPER_MOTOR_STEPS_ONE_LAP * 8;
@@ -24,7 +24,7 @@ const noop = () => {};
 
 const withDebugHOF = func => (DEBUG ? functionCallLoggerHOF(func) : func);
 
-module.exports = {
+export default {
   calculateSteps,
   withDebugHOF,
   noop,

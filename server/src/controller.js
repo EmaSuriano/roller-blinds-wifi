@@ -24,7 +24,11 @@ router
     }
   });
 
-router.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
+router.get('/', (req, res) => {
+  const dirName = __dirname;
+
+  return res.sendFile(dirName + '/index.html');
+});
 
 router.get('/status', (req, res) => {
   const status = rollerBlind.getStatus();

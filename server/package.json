@@ -19,7 +19,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "start": "rm -rf ./build && webpack --config webpack.config.server.js",
+    "start": "webpack --config webpack.config.server.js",
     "start-disable": "cross-env DISABLE_BOARD=true npm run start",
     "test-connection": "node ./src/test-connection.js"
   },
@@ -27,6 +27,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
+    "clean-webpack-plugin": "^0.1.17",
     "cross-env": "^5.1.1"
   }
 }
