@@ -4,10 +4,10 @@
 <head>
     <title>Roller blinds socket test</title>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script>
         $(function () {
-            var socket = io();
+            var socket = io('http://localhost:8000');
             $("#myRange").on("change", function () {
                 socket.emit('SET_POSITION', this.value);
             });

@@ -1,9 +1,24 @@
+import socketIo from 'socket.io';
 const rollerBlind = require('./rollerBlind');
+
 const { ACTIONS, ERROR_MESSAGE, DEBUG } = require('./constants');
 
-module.exports = io => {
+const initSocket = server => {
+  const io = socketIo(server, {
+    serveClient: false,
+    wsEngine: 'ws', // uws is not supported since it is a native module
+  });
+
+  let connectedSockets = [];
+
   io.on('connection', async socket => {
-    if (DEBUG) console.log('New connection!');
+    connectedSockets.push(socket.id);
+    console.log('new socket connection', connectedSockets);
+
+    socket.on('disconnect', () => {
+      connectedSockets = connectedSockets.filter(x => x !== socket.id);
+      console.log('disconnected socket', connectedSockets);
+    });
 
     socket.emit('action', { type: ACTIONS.SOCKET_CONNECTED });
     try {
@@ -44,3 +59,5 @@ module.exports = io => {
     });
   });
 };
+
+export default initSocket;

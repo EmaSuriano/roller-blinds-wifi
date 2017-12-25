@@ -1,9 +1,14 @@
 import http from 'http';
-import app from './app';
+import initSocket from './socket';
 import { SERVER_PORT } from './constants';
+import express from 'express';
+import controller from './controller';
 
+const app = express().use(controller);
 const server = http.createServer(app);
+
 let currentApp = app;
+let currentAppSocket = initSocket(server);
 
 server.listen(SERVER_PORT, () => {
   console.log(

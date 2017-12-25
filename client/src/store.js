@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import reducer from './reducers/reducer';
 
-const socket = io('http://192.168.43.28:8000');
+const socket = io('http://localhost:8000');
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
 export default createStore(

@@ -28,7 +28,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin({ quiet: true }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin(['*.*']),
+    new CleanWebpackPlugin(['*.hot-update.json', '*.hot-update.js']),
   ],
   output: {
     path: path.join(__dirname),
@@ -36,9 +36,10 @@ module.exports = {
   },
   devServer: {
     inline: true,
-    port: 8008,
+    port: 8000,
   },
   node: {
     __dirname: false,
   },
+  devtool: 'inline-source-map',
 };

@@ -1,7 +1,7 @@
 import rollerBlind from './rollerBlind';
-const express = require('express');
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
 router
   .route('/position')
@@ -24,11 +24,7 @@ router
     }
   });
 
-router.get('/', (req, res) => {
-  const dirName = __dirname;
-  console.log(dirName);
-  return res.sendFile(dirName + '/src/index.html');
-});
+router.get('/', (req, res) => res.sendFile(__dirname + '/src/index.html'));
 
 router.get('/status', (req, res) => {
   const status = rollerBlind.getStatus();
