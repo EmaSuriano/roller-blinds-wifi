@@ -9,7 +9,7 @@ const MAX_POSITION = 100;
 const positionToSteps = position =>
   position * TOTAL_STEPS_FULL_BLINDS / MAX_POSITION;
 
-const calculateSteps = (newPosition, currentPosition) =>
+export const calculateSteps = (newPosition, currentPosition) =>
   positionToSteps(newPosition) - positionToSteps(currentPosition);
 
 const functionCallLoggerHOF = func => params => {

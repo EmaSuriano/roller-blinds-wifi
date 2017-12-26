@@ -41,6 +41,14 @@ const DEBUG = process.env.DEBUG || DEFAULT_ENV.DEBUG;
 
 const DISABLE_BOARD = process.env.DISABLE_BOARD || DEFAULT_ENV.DISABLE_BOARD;
 
+const ENVIROMENT_VARIABLES = {
+  PORT: process.env.PORT || 8000,
+  MOTOR_PINS: process.env.MOTOR_PINS || [14, 12, 13, 15],
+  ETHERPORT_PORT: process.env.ETHERPORT_PORT || 3030,
+  DEBUG: process.env.DEBUG || true,
+  DISABLE_BOARD: process.env.BOARD || false,
+};
+
 module.exports = {
   BOARD_STATUS,
   ERROR_MESSAGE,
@@ -50,4 +58,5 @@ module.exports = {
   ETHERPORT_PORT,
   DEBUG,
   DISABLE_BOARD,
+  ENVIROMENT_VARIABLES,
 };

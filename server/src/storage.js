@@ -1,4 +1,4 @@
-const datastore = require('nedb-promise');
+import datastore from 'nedb-promise';
 import { withDebugHOF } from './utils';
 const { ERROR_MESSAGE, DEBUG } = require('./constants');
 

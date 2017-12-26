@@ -60,7 +60,7 @@ function Board() {
 
 function BoardDisable() {
   console.log('BOARD SUCCESSFULLY DISABLED!');
-  this.status = BOARD_STATUS;
+  this.status = BOARD_STATUS.SUCCESSFUL;
   this.isMoving = false;
 
   const moveMotor = steps =>

@@ -26,20 +26,18 @@ module.exports = {
     new StartServerPlugin('app.js'),
     new webpack.EnvironmentPlugin(['DISABLE_BOARD']),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin({ quiet: true }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(['*.hot-update.json', '*.hot-update.js']),
+    new webpack.DefinePlugin({
+      'process.env': { BUILD_TARGET: JSON.stringify('app') },
+    }),
   ],
   output: {
     path: path.join(__dirname),
     filename: 'app.js',
   },
-  devServer: {
-    inline: true,
-    port: 8000,
-  },
   node: {
     __dirname: false,
   },
-  devtool: 'inline-source-map',
 };

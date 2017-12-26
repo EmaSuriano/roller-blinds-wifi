@@ -1,5 +1,5 @@
 import socketIo from 'socket.io';
-const rollerBlind = require('./rollerBlind');
+import rollerBlind from './rollerBlind';
 
 const { ACTIONS, ERROR_MESSAGE, DEBUG } = require('./constants');
 
@@ -11,13 +11,16 @@ const initSocket = server => {
 
   let connectedSockets = [];
 
-  io.on('connection', async socket => {
-    connectedSockets.push(socket.id);
-    console.log('new socket connection', connectedSockets);
+  const printConnectedSocket = () => {
+    const connectedSockets = io.sockets.clients();
+    return connectedSockets;
+  };
+
+  const onSocket = async socket => {
+    console.log('new socket connection jajaj', printConnectedSocket());
 
     socket.on('disconnect', () => {
-      connectedSockets = connectedSockets.filter(x => x !== socket.id);
-      console.log('disconnected socket', connectedSockets);
+      console.log('disconnected socket', printConnectedSocket());
     });
 
     socket.emit('action', { type: ACTIONS.SOCKET_CONNECTED });
@@ -57,7 +60,9 @@ const initSocket = server => {
           break;
       }
     });
-  });
+  };
+
+  io.on('connection', onSocket);
 };
 
 export default initSocket;

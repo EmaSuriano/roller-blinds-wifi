@@ -1,6 +1,6 @@
-const storage = require('./storage');
+import storage from './storage';
 import Board from './board';
-const { calculateSteps, noop } = require('./utils');
+import { calculateSteps } from './utils';
 
 const board = new Board();
 
@@ -14,7 +14,7 @@ const setPosition = async newPosition => {
   return newPosition;
 };
 
-const getStatus = () => board.status;
+const getStatus = () => board.status + 'asdasd';
 
 export default {
   getPosition,
